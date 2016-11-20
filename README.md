@@ -1,7 +1,11 @@
 # ModelingOntology
 
-An OWL ontology to support analytical investigations of manufacturing processes.
+An OWL ontology to support analytical investigations of manufacturing processes. The ontology is composed of three files:
+ * [modeling.ttl](https://github.com/usnistgov/ModelingOntology/blob/master/modeling.ttl) defines the upper-level ontology.
+ * [machining.ttl](https://github.com/usnistgov/ModelingOntology/blob/master/machining.ttl) defines modeling of machining processes.
+ * [operations.ttl](https://github.com/usnistgov/ModelingOntology/blob/master/operations.ttl) defines modeling of production systems (operations research focus).
 
-The ontology imports QUDT, dtypes, vaem, and (at least temporarily), a statistics ontology. We maintain our own copies of these due to problems we encountered in the linkedmodel.org versions of these. Note that we are using the 1.1 version of QUDT, so this problem needs to be revisited. (V2 was released 2016-09-18).
+The ontology imports QUDT, which imports dtypes, vaem. Notice that we currently supply files defining these. None of these were modified from what is available at [qudt.org](http://www.qudt.org/release2/qudt-catalog.html). However, in the past (old version of QUDT), we experienced problems loading these models into Protege, so we kept our own modified versions. The hope is that these new versions won't need to be touched and won't be in our repository much longer.
+
 
 
