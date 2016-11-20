@@ -576,7 +576,7 @@ _:genid18 a owl:Restriction ;
 
 :RandomVariable a owl:Class ;
 	rdfs:subClassOf :Function ;
-	rdfs:comment "a measurable function from a probability space (i.e. outcomes) to values. Note: typically a random variable is used to enable specification and sampling of a probability distribution associated with the probability space." .
+	rdfs:comment "a measurable function over a probability space (i.e. outcomes). Note: typically a random variable is used to enable specification and sampling of a probability distribution associated with the probability space." .
 # 
 # http://modelmeth.nist.gov/modeling#RegressionEquation
 
