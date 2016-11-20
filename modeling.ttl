@@ -1,4 +1,4 @@
-@prefix : <http://modelmeth.nist.gov/manufacturing#> .
+@prefix : <http://modelmeth.nist.gov/modeling#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -7,8 +7,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix unit: <http://qudt.org/vocab/unit#> .
 
-<http://modelmeth.nist.gov/manufacturing> a owl:Ontology ;
-	owl:imports <http://model-meth.nist.gov/1.2/schema/vaem> , <http://model-meth.nist.gov/1.0/schema/dtype> .
+<http://modelmeth.nist.gov/modeling> a owl:Ontology ;
+	owl:imports <http://qudt.org/2.0/schema/qudt> .
 # 
 # 
 # #################################################################
@@ -18,7 +18,7 @@
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#hasUnits
+# http://modelmeth.nist.gov/modeling#hasUnits
 
 :hasUnits a owl:AnnotationProperty .
 # 
@@ -35,7 +35,7 @@
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#characteristicObjectiveType
+# http://modelmeth.nist.gov/modeling#characteristicObjectiveType
 
 :characteristicObjectiveType a rdfs:Datatype ;
 	owl:equivalentClass _:genid1 .
@@ -51,7 +51,7 @@ _:genid4 a rdf:List ;
 	rdf:first "sought_characteristic"^^xsd:NMTOKEN ;
 	rdf:rest rdf:nil .
 # 
-# http://modelmeth.nist.gov/manufacturing#processCharacteristicObjectiveType
+# http://modelmeth.nist.gov/modeling#processCharacteristicObjectiveType
 
 :processCharacteristicObjectiveType a rdfs:Datatype ;
 	owl:equivalentClass _:genid6 .
@@ -76,26 +76,25 @@ _:genid9 a rdf:List ;
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#hasCost
+# http://modelmeth.nist.gov/modeling#hasCost
 
 :hasCost a owl:ObjectProperty ;
 	rdfs:domain :Resource .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasDescription
+# http://modelmeth.nist.gov/modeling#hasDescription
 
 :hasDescription a owl:ObjectProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasDuration
+# http://modelmeth.nist.gov/modeling#hasDuration
 
 :hasDuration a owl:ObjectProperty ;
-	rdfs:domain :Process .
+	rdfs:domain :ProcessOccurrence .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasFeedRate
+# http://modelmeth.nist.gov/modeling#hasFeedRate
 
-:hasFeedRate a owl:ObjectProperty , owl:FunctionalProperty ;
-	rdfs:domain :MachiningProcess .
+:hasFeedRate a owl:ObjectProperty , owl:FunctionalProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasFinishedPart
+# http://modelmeth.nist.gov/modeling#hasFinishedPart
 
 :hasFinishedPart a owl:ObjectProperty ;
 	owl:inverseOf :hasWorkpiece ;
@@ -103,55 +102,65 @@ _:genid9 a rdf:List ;
 	rdfs:domain :Workpiece ;
 	rdfs:range :FinishedPart .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasMaterial
+# http://modelmeth.nist.gov/modeling#hasMaterialType
 
-:hasMaterial a owl:ObjectProperty ;
-	rdfs:range :CuttingToolMaterial , :Material .
+:hasMaterialType a owl:ObjectProperty ;
+	rdfs:domain _:genid11 .
+
+_:genid11 a owl:Restriction ;
+	owl:onProperty :hasMaterialType ;
+	owl:someValuesFrom :Physical .
+
+:hasMaterialType rdfs:range :MaterialType .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasProcessCharacteristic
+# http://modelmeth.nist.gov/modeling#hasProcessCharacteristic
 
 :hasProcessCharacteristic a owl:ObjectProperty ;
 	owl:inverseOf :hasProcessContext .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasProcessContext
+# http://modelmeth.nist.gov/modeling#hasProcessContext
 
 :hasProcessContext a owl:ObjectProperty ;
-	rdfs:range :Process .
+	rdfs:range _:genid12 .
+
+_:genid12 a owl:Restriction ;
+	owl:onProperty :hasProcessContext ;
+	owl:someValuesFrom :ProcessType .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasQuantityKind
+# http://modelmeth.nist.gov/modeling#hasQuantityKind
 
 :hasQuantityKind a owl:ObjectProperty ;
 	rdfs:subPropertyOf owl:topObjectProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasSymbol
+# http://modelmeth.nist.gov/modeling#hasSymbol
 
 :hasSymbol a owl:ObjectProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasWorkpiece
+# http://modelmeth.nist.gov/modeling#hasWorkpiece
 
 :hasWorkpiece a owl:ObjectProperty , owl:InverseFunctionalProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#isDirectlyProportionalTo
+# http://modelmeth.nist.gov/modeling#isDirectlyProportionalTo
 
 :isDirectlyProportionalTo a owl:ObjectProperty , owl:SymmetricProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#isInverselyProportionalTo
+# http://modelmeth.nist.gov/modeling#isInverselyProportionalTo
 
 :isInverselyProportionalTo a owl:ObjectProperty , owl:SymmetricProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#referencesEquation
+# http://modelmeth.nist.gov/modeling#referencesEquation
 
 :referencesEquation a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
 	rdfs:domain :Model ;
 	rdfs:range :Equation .
 # 
-# http://modelmeth.nist.gov/manufacturing#referencesProperty
+# http://modelmeth.nist.gov/modeling#referencesProperty
 
 :referencesProperty a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
 	rdfs:domain :Model ;
 	rdfs:range :ModelProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#representsProperty
+# http://modelmeth.nist.gov/modeling#representsProperty
 
 :representsProperty a owl:ObjectProperty ;
 	rdfs:subPropertyOf owl:topObjectProperty ;
@@ -168,12 +177,12 @@ _:genid9 a rdf:List ;
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#hasDimensionalConsistency
+# http://modelmeth.nist.gov/modeling#hasDimensionalConsistency
 
 :hasDimensionalConsistency a owl:DatatypeProperty ;
 	rdfs:range xsd:boolean .
 # 
-# http://modelmeth.nist.gov/manufacturing#hasObjectiveType
+# http://modelmeth.nist.gov/modeling#hasObjectiveType
 
 :hasObjectiveType a owl:DatatypeProperty , owl:FunctionalProperty .
 # 
@@ -186,335 +195,332 @@ _:genid9 a rdf:List ;
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#Abstract
+# http://modelmeth.nist.gov/modeling#Abstract
 
 :Abstract a owl:Class ;
 	rdfs:comment "Aspect with neither a spatial nor a temporal location" .
 # 
-# http://modelmeth.nist.gov/manufacturing#AleatoryUncertainty
+# http://modelmeth.nist.gov/modeling#AleatoryUncertainty
 
 :AleatoryUncertainty a owl:Class ;
 	rdfs:subClassOf :Uncertainty ;
 	owl:disjointWith :EpistemicUncertainty ;
 	rdfs:comment "Uncertainty that, within the context of the modeling universe, cannot be reduced by gathering more data or by refining models. [Der Kuireghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Alloy
+# http://modelmeth.nist.gov/modeling#Alloy
 
 :Alloy a owl:Class ;
-	rdfs:subClassOf :Material ;
+	rdfs:subClassOf :MaterialType ;
 	rdfs:comment "Material composed of multiple metals or metals and other elements" .
 # 
-# http://modelmeth.nist.gov/manufacturing#AnalyticalModel
+# http://modelmeth.nist.gov/modeling#AnalyticalModel
 
 :AnalyticalModel a owl:Class ;
-	owl:equivalentClass :PhysicalModel ;
-	rdfs:subClassOf :Model ;
+	rdfs:subClassOf :PredictiveModel ;
 	rdfs:comment "a Model that relates BasicVariables to DerivedVariables." .
 # 
-# http://modelmeth.nist.gov/manufacturing#BasicVariable
+# http://modelmeth.nist.gov/modeling#BasicVariable
 
 :BasicVariable a owl:Class ;
 	rdfs:subClassOf :Variable ;
 	owl:disjointWith :DerivedVariable ;
 	rdfs:comment "a Variable that corresponds to a Property that can be directly measured. Note: an individual may be both a BasicVariable and a RandomVariable." .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description
+# http://modelmeth.nist.gov/modeling#CADModel
 
-:Characteristic_Description a owl:Class ;
-	owl:equivalentClass _:genid11 .
-
-_:genid11 a owl:Restriction ;
-	owl:onProperty :hasProcessContext ;
-	owl:someValuesFrom :MachiningProcess .
-
-:Characteristic_Description rdfs:subClassOf :ProcessCharacteristic .
+:CADModel a owl:Class ;
+	rdfs:subClassOf :SubscriptiveModel ;
+	owl:backwardCompatibleWith "a model that provides intended geometry of a Part" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ComputationalUncertainty
+# http://modelmeth.nist.gov/modeling#CausalViewpointVariable
+
+:CausalViewpointVariable a owl:Class ;
+	rdfs:subClassOf :Variable .
+# 
+# http://modelmeth.nist.gov/modeling#Characteristic
+
+:Characteristic a owl:Class ;
+	rdfs:subClassOf :Abstract .
+# 
+# http://modelmeth.nist.gov/modeling#CharacteristicDescription
+
+:CharacteristicDescription a owl:Class ;
+	rdfs:subClassOf :ProcessCharacteristic ;
+	owl:deprecated "this remains here until I can figure out what to do with the many individuals of this type. (They were added for the summer work.)" .
+# 
+# http://modelmeth.nist.gov/modeling#ComputationalUncertainty
 
 :ComputationalUncertainty a owl:Class ;
 	rdfs:subClassOf :EpistemicUncertainty ;
 	rdfs:comment "Uncertainty modeled by the random variables Y corresponding to the derived variables y, which may include, in addition to all the above uncertainties, uncertain errors resulting from computational errors, numerical approximations or truncations. For example, the computation of load effects in a nonlinear structure by a finite element procedure employs iterative calculations, which invariably involve convergence tolerances and truncation errors. [Der Kiureghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Credibility
+# http://modelmeth.nist.gov/modeling#ControlledVariable
+
+:ControlledVariable a owl:Class ;
+	rdfs:subClassOf :CausalViewpointVariable ;
+	owl:disjointWith :NonControlledVariable , :PerformanceVariable ;
+	rdfs:comment "a variable that, in the context of the analysis, can be set. AKA a design variable." .
+# 
+# http://modelmeth.nist.gov/modeling#Cost
+
+:Cost a owl:Class ;
+	rdfs:subClassOf :EconomicCharacteristic .
+# 
+# http://modelmeth.nist.gov/modeling#Credibility
 
 :Credibility a owl:Class ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "an expression of confidence in a belief" .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingInsert
+# http://modelmeth.nist.gov/modeling#CuttingInsert
 
 :CuttingInsert a owl:Class ;
-	rdfs:subClassOf :Equipment ;
+	rdfs:subClassOf :CuttingTool ;
 	rdfs:comment "Removable, replaceable equipment piece that performs cutting operation" .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingTool
+# http://modelmeth.nist.gov/modeling#CuttingTool
 
 :CuttingTool a owl:Class ;
-	rdfs:subClassOf :Equipment .
+	rdfs:subClassOf :Tool ;
+	rdfs:comment "a Tool used to remove material from the Part" .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingToolMaterial
-
-:CuttingToolMaterial a owl:Class ;
-	rdfs:subClassOf :CuttingTool .
-# 
-# http://modelmeth.nist.gov/manufacturing#DerivedVariable
+# http://modelmeth.nist.gov/modeling#DerivedVariable
 
 :DerivedVariable a owl:Class ;
 	rdfs:subClassOf :Variable ;
 	rdfs:comment "a Variable that corresponds to a Property that cannot be directly measured, but is known only through its relationship with other Variables." .
 # 
-# http://modelmeth.nist.gov/manufacturing#EconomicCharacteristic
+# http://modelmeth.nist.gov/modeling#DiscreteEventSimulation
+
+:DiscreteEventSimulation a owl:Class ;
+	rdfs:subClassOf :ProbabilisticModel ;
+	rdfs:comment "a Monte Carlo simulation that describes the probable state of a system by simulating the consequences of a probabilistic occurrence of events" .
+# 
+# http://modelmeth.nist.gov/modeling#EconomicCharacteristic
 
 :EconomicCharacteristic a owl:Class ;
-	rdfs:subClassOf :Abstract , _:genid12 .
+	rdfs:subClassOf :Characteristic , _:genid13 .
 
-_:genid12 a owl:Restriction ;
+_:genid13 a owl:Restriction ;
 	owl:onProperty :hasObjectiveType ;
 	owl:hasValue "avoided_characteristic" .
 
 :EconomicCharacteristic rdfs:comment "Monetary value of an aspect of the smart manufacturing process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#EditingNotes
+# http://modelmeth.nist.gov/modeling#EditingNotes
 
 :EditingNotes a owl:Class ;
 	rdfs:subClassOf :Physical .
 # 
-# http://modelmeth.nist.gov/manufacturing#EpistemicUncertainty
+# http://modelmeth.nist.gov/modeling#EpistemicUncertainty
 
 :EpistemicUncertainty a owl:Class ;
 	rdfs:subClassOf :Uncertainty ;
 	rdfs:comment "Uncertainty that, within the context of the modeling universe, can be reduced by gathering more data or by refining models. [Der Kuireghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Equation
+# http://modelmeth.nist.gov/modeling#Equation
 
 :Equation a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "Function describing the relation between ModelProperties" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Equipment
+# http://modelmeth.nist.gov/modeling#Equipment
 
 :Equipment a owl:Class ;
 	rdfs:subClassOf :Resource ;
 	rdfs:comment "Machine(s) used to turn workpiece into finished part" .
 # 
-# http://modelmeth.nist.gov/manufacturing#EquipmentCharacteristic
-
-:EquipmentCharacteristic a owl:Class ;
-	rdfs:subClassOf :Physical ;
-	rdfs:comment "Equipment aspect that contributes to the manufacturing process" .
-# 
-# http://modelmeth.nist.gov/manufacturing#FEAModel
+# http://modelmeth.nist.gov/modeling#FEAModel
 
 :FEAModel a owl:Class ;
 	rdfs:subClassOf :NumericalModel ;
 	rdfs:comment "a NumericalModel that applies the finite element method." .
 # 
-# http://modelmeth.nist.gov/manufacturing#Fidelity
+# http://modelmeth.nist.gov/modeling#Fidelity
 
 :Fidelity a owl:Class ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "the degree to which a Model agrees with reality" .
 # 
-# http://modelmeth.nist.gov/manufacturing#FinishedPart
+# http://modelmeth.nist.gov/modeling#FinishedPart
 
 :FinishedPart a owl:Class ;
-	rdfs:subClassOf :Physical ;
-	rdfs:comment "A manufactured item ready for use by the customer, or to be included in an assembly." .
+	rdfs:subClassOf :Part ;
+	rdfs:comment "A Part that is ready for use by the customer, or to be included in an assembly." .
 # 
-# http://modelmeth.nist.gov/manufacturing#Fixture
+# http://modelmeth.nist.gov/modeling#Function
 
-:Fixture a owl:Class ;
-	rdfs:subClassOf :Equipment .
+:Function a owl:Class ;
+	rdfs:subClassOf :ModelAbstraction .
 # 
-# http://modelmeth.nist.gov/manufacturing#Labor
+# http://modelmeth.nist.gov/modeling#InfluencedVariable
+
+:InfluencedVariable a owl:Class ;
+	rdfs:subClassOf :CausalViewpointVariable ;
+	rdfs:comment "a Variable whose value is interpreted as an effect of a causal relationship described by the model" .
+# 
+# http://modelmeth.nist.gov/modeling#Labor
 
 :Labor a owl:Class ;
 	rdfs:subClassOf :Resource ;
-	rdfs:comment "Personnel responsible for setup and overview of smart manufaturing process" .
+	owl:backwardCompatibleWith "the activities of people engaged in manufacturing." .
 # 
-# http://modelmeth.nist.gov/manufacturing#MachineCharacteristic
-
-:MachineCharacteristic a owl:Class ;
-	rdfs:subClassOf :EquipmentCharacteristic ;
-	rdfs:comment "Machine aspect that contributes to the manufacturing process" .
-# 
-# http://modelmeth.nist.gov/manufacturing#MachineTool
-
-:MachineTool a owl:Class ;
-	rdfs:subClassOf :Equipment .
-# 
-# http://modelmeth.nist.gov/manufacturing#Machinery
-
-:Machinery a owl:Class ;
-	rdfs:subClassOf :Resource ;
-	rdfs:comment "Machines needed to produce part" .
-# 
-# http://modelmeth.nist.gov/manufacturing#MachiningProcess
-
-:MachiningProcess a owl:Class ;
-	rdfs:subClassOf :ManufacturingProcess ;
-	rdfs:comment "A subtractive manufacturing process" .
-# 
-# http://modelmeth.nist.gov/manufacturing#MachiningProcessParameter
+# http://modelmeth.nist.gov/modeling#MachiningProcessParameter
 
 :MachiningProcessParameter a owl:Class ;
 	rdfs:subClassOf :ProcessParameter ;
 	rdfs:comment "A controllable characteristic that can be adjusted for different final results" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ManufacturingProcess
+# http://modelmeth.nist.gov/modeling#MaterialType
 
-:ManufacturingProcess a owl:Class ;
-	rdfs:subClassOf :Process ;
-	rdfs:comment "A process that is part of creating a manufactured artifact" .
+:MaterialType a owl:Class ;
+	rdfs:subClassOf :PhysicalCharacteristic ;
+	rdfs:comment "class of material found in a part" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Material
-
-:Material a owl:Class ;
-	rdfs:subClassOf :WorkpieceCharacteristic ;
-	rdfs:comment "Substance that the Workpiece/FinishedPart is made up of" .
-# 
-# http://modelmeth.nist.gov/manufacturing#MeasurementError
+# http://modelmeth.nist.gov/modeling#MeasurementError
 
 :MeasurementError a owl:Class ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "the difference between a measured value and the 'true value' of the thing being measured [S. Bell]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Model
+# http://modelmeth.nist.gov/modeling#Model
 
 :Model a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "A simulation of a manufacturing process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelAbstraction
+# http://modelmeth.nist.gov/modeling#ModelAbstraction
 
 :ModelAbstraction a owl:Class ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "A conceptualization of a manufacturing process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelFormUncertainty
+# http://modelmeth.nist.gov/modeling#ModelFormUncertainty
 
 :ModelFormUncertainty a owl:Class ;
 	rdfs:subClassOf :EpistemicUncertainty .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelParameter
+# http://modelmeth.nist.gov/modeling#ModelParameter
 
 :ModelParameter a owl:Class ;
 	rdfs:subClassOf :ModelProperty ;
 	rdfs:comment "a ModelProperty whose value can be specified so as to specify a context of the analysis." .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelProperty
+# http://modelmeth.nist.gov/modeling#ModelProperty
 
 :ModelProperty a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	owl:disjointWith :Symbol ;
 	rdfs:comment "A characteristic that affects calculations and decisions made in a specific model" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelPropertyMeasurementUncertainty
+# http://modelmeth.nist.gov/modeling#ModelPropertyMeasurementUncertainty
 
 :ModelPropertyMeasurementUncertainty a owl:Class ;
 	rdfs:subClassOf :UncertaintySource ;
 	rdfs:comment "Kiuregian: Uncertainty inherent in the basic random variables \\bold{X}, such as the uncertainty inherent in material property constants and load values, which can be directly measured." .
 # 
-# http://modelmeth.nist.gov/manufacturing#ModelUncertainty
+# http://modelmeth.nist.gov/modeling#ModelUncertainty
 
 :ModelUncertainty a owl:Class ;
 	rdfs:subClassOf :Uncertainty .
 # 
-# http://modelmeth.nist.gov/manufacturing#Modifier
+# http://modelmeth.nist.gov/modeling#Modifier
 
 :Modifier a owl:Class ;
 	rdfs:subClassOf :Abstract .
 # 
-# http://modelmeth.nist.gov/manufacturing#MultiPointCutting
+# http://modelmeth.nist.gov/modeling#NonControlledVariable
 
-:MultiPointCutting a owl:Class ;
-	rdfs:subClassOf :MachiningProcess .
+:NonControlledVariable a owl:Class ;
+	rdfs:subClassOf :CausalViewpointVariable ;
+	rdfs:comment "a variable in a causal relationship for which intervention is impossible." .
 # 
-# http://modelmeth.nist.gov/manufacturing#NumericalModel
+# http://modelmeth.nist.gov/modeling#NumericalModel
 
 :NumericalModel a owl:Class ;
-	rdfs:subClassOf :Model ;
+	rdfs:subClassOf :PredictiveModel ;
 	rdfs:comment "a Model that encodes an AnalyticalModel or ProbabilisticModel for the purpose of simulation or computation of DerivedVariables." .
 # 
-# http://modelmeth.nist.gov/manufacturing#ObjectiveFunction
+# http://modelmeth.nist.gov/modeling#ObjectiveFunction
 
 :ObjectiveFunction a owl:Class ;
 	rdfs:subClassOf :Equation ;
 	rdfs:comment "The function that describes the objective to be accomplished" .
 # 
-# http://modelmeth.nist.gov/manufacturing#POD-edits-2016-09-19
-
-:POD-edits-2016-09-19 a owl:Class ;
-	rdfs:subClassOf :EditingNotes .
-# 
-# http://modelmeth.nist.gov/manufacturing#ParameterMeasurementUncertainty
+# http://modelmeth.nist.gov/modeling#ParameterMeasurementUncertainty
 
 :ParameterMeasurementUncertainty a owl:Class ;
 	rdfs:subClassOf :Uncertainty ;
 	rdfs:comment "Uncertain errors involved in measuring of observations, based on which the parameters [of physical and probabilistic models] are estimated. These include errors involved in indirect measurement, e.g., the measurement of a quantity through a proxy, as in non-destructive testing of material strength. [Der Kiureghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#PartDimension
+# http://modelmeth.nist.gov/modeling#Part
+
+:Part a owl:Class ;
+	rdfs:subClassOf :Physical ;
+	rdfs:comment "an intended product of production" .
+# 
+# http://modelmeth.nist.gov/modeling#PartDimension
 
 :PartDimension a owl:Class ;
-	rdfs:subClassOf :WorkpieceCharacteristic , _:genid13 .
+	rdfs:subClassOf :PhysicalCharacteristic , _:genid14 .
 
-_:genid13 a owl:Restriction ;
+_:genid14 a owl:Restriction ;
 	owl:onProperty :hasQuantityKind ;
 	owl:hasValue qudt:Length .
 # 
-# http://modelmeth.nist.gov/manufacturing#Physical
+# http://modelmeth.nist.gov/modeling#PerformanceVariable
+
+:PerformanceVariable a owl:Class ;
+	rdfs:subClassOf :CausalViewpointVariable .
+# 
+# http://modelmeth.nist.gov/modeling#Physical
 
 :Physical a owl:Class ;
 	rdfs:comment "Aspect that has a spatial or temporal location" .
 # 
-# http://modelmeth.nist.gov/manufacturing#PhysicalEquation
+# http://modelmeth.nist.gov/modeling#PhysicalCharacteristic
+
+:PhysicalCharacteristic a owl:Class ;
+	rdfs:subClassOf :Characteristic ;
+	rdfs:comment "Aspect of the Workpiece" .
+# 
+# http://modelmeth.nist.gov/modeling#PhysicalEquation
 
 :PhysicalEquation a owl:Class ;
-	rdfs:subClassOf :Equation , _:genid14 .
+	rdfs:subClassOf :Equation , _:genid15 .
 
-_:genid14 a owl:Restriction ;
+_:genid15 a owl:Restriction ;
 	owl:onProperty :hasDimensionalConsistency ;
 	owl:hasValue "true"^^xsd:boolean .
 
 :PhysicalEquation rdfs:comment "Equations based on physics concepts with consistent dimensionality" .
 # 
-# http://modelmeth.nist.gov/manufacturing#PhysicalModel
+# http://modelmeth.nist.gov/modeling#PredictiveModel
 
-:PhysicalModel a owl:Class ;
+:PredictiveModel a owl:Class ;
 	rdfs:subClassOf :Model ;
-	rdfs:comment "a Model that relates BasicVariables to DerivedVariables." .
+	rdfs:comment "a Model that, given a set of initial circumstances, describes likely outcomes" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProbabilisticModel
+# http://modelmeth.nist.gov/modeling#ProbabilisticModel
 
 :ProbabilisticModel a owl:Class ;
-	rdfs:subClassOf :Model .
+	rdfs:subClassOf :Model ;
+	owl:backwardCompatibleWith "a model that describes in terms of probabilities" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProbabilisticModelFormUncertainty
+# http://modelmeth.nist.gov/modeling#ProbabilisticModelFormUncertainty
 
 :ProbabilisticModelFormUncertainty a owl:Class ;
 	rdfs:subClassOf :UncertaintySource ;
 	rdfs:comment "Kuiregian: Uncertain model error resulting from selection of the form of the probabilistic sub-model used to describe the distribution of basic variables." .
 # 
-# http://modelmeth.nist.gov/manufacturing#Process
-
-:Process a owl:Class ;
-	owl:equivalentClass _:genid15 .
-
-_:genid15 a owl:Restriction ;
-	owl:onProperty :hasProcessCharacteristic ;
-	owl:someValuesFrom :ProcessCharacteristic .
-
-:Process rdfs:subClassOf :Physical ;
-	rdfs:comment "Description of the manufacturing taking place to produce the finished part" .
-# 
-# http://modelmeth.nist.gov/manufacturing#ProcessCharacteristic
+# http://modelmeth.nist.gov/modeling#ProcessCharacteristic
 
 :ProcessCharacteristic a owl:Class ;
 	owl:equivalentClass _:genid16 .
 
 _:genid16 a owl:Restriction ;
 	owl:onProperty :hasProcessContext ;
-	owl:allValuesFrom :Process .
+	owl:allValuesFrom :ProcessOccurrence .
 
 :ProcessCharacteristic owl:equivalentClass _:genid17 .
 
@@ -522,104 +528,125 @@ _:genid17 a owl:Restriction ;
 	owl:onProperty :hasSymbol ;
 	owl:allValuesFrom :Symbol .
 
-:ProcessCharacteristic rdfs:subClassOf :Physical ;
+:ProcessCharacteristic rdfs:subClassOf :Characteristic ;
 	rdfs:comment "A property describing a manufacturing process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProcessConstraint
+# http://modelmeth.nist.gov/modeling#ProcessConstraint
 
 :ProcessConstraint a owl:Class ;
 	rdfs:subClassOf :ProcessCharacteristic .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProcessParameter
+# http://modelmeth.nist.gov/modeling#ProcessOccurrence
+
+:ProcessOccurrence a owl:Class ;
+	owl:equivalentClass _:genid18 .
+
+_:genid18 a owl:Restriction ;
+	owl:onProperty :hasProcessCharacteristic ;
+	owl:someValuesFrom :ProcessCharacteristic .
+
+:ProcessOccurrence rdfs:subClassOf :Physical ;
+	rdfs:comment "Description of the manufacturing taking place to produce the finished part" .
+# 
+# http://modelmeth.nist.gov/modeling#ProcessParameter
 
 :ProcessParameter a owl:Class ;
 	rdfs:subClassOf :ProcessCharacteristic ;
 	rdfs:comment "A controllable characteristics of a manufacturing process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#PropertyMeasurementUncertainty
+# http://modelmeth.nist.gov/modeling#ProcessPlan
+
+:ProcessPlan a owl:Class ;
+	rdfs:subClassOf :SubscriptiveModel ;
+	owl:backwardCompatibleWith "a Subscriptive model that describes how a product is made. Note it may refer to actual Equipment instances used or only classes of equipment used." .
+# 
+# http://modelmeth.nist.gov/modeling#ProcessType
+
+:ProcessType a owl:Class ;
+	rdfs:subClassOf :Abstract ;
+	rdfs:comment "a classification of processes" .
+# 
+# http://modelmeth.nist.gov/modeling#PropertyMeasurementUncertainty
 
 :PropertyMeasurementUncertainty a owl:Class ;
 	rdfs:subClassOf :Uncertainty ;
 	rdfs:comment "Uncertainty inherent in the basic random variables, such as the uncertainty inherent in material property constants and load values, which can be directly measured. [Der Kiureghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#RandomVariable
+# http://modelmeth.nist.gov/modeling#RandomVariable
 
 :RandomVariable a owl:Class ;
-	rdfs:subClassOf :Variable ;
-	rdfs:comment "a Variable taking values from a distribution." .
+	rdfs:subClassOf :Function ;
+	rdfs:comment "a measurable function from a probability space (i.e. outcomes) to values. Note: typically a random variable is used to enable specification and sampling of a probability distribution associated with the probability space." .
 # 
-# http://modelmeth.nist.gov/manufacturing#RegressionEquation
+# http://modelmeth.nist.gov/modeling#RegressionEquation
 
 :RegressionEquation a owl:Class ;
-	rdfs:subClassOf :Equation , _:genid18 .
+	rdfs:subClassOf :Equation , _:genid19 .
 
-_:genid18 a owl:Restriction ;
+_:genid19 a owl:Restriction ;
 	owl:onProperty :hasDimensionalConsistency ;
 	owl:hasValue "false"^^xsd:boolean .
 
 :RegressionEquation rdfs:comment "Equation derived from observations" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Resource
+# http://modelmeth.nist.gov/modeling#Resource
 
 :Resource a owl:Class ;
-	owl:equivalentClass _:genid19 .
+	owl:equivalentClass _:genid20 .
 
-_:genid19 a owl:Restriction ;
+_:genid20 a owl:Restriction ;
 	owl:onProperty :hasCost ;
 	owl:allValuesFrom :EconomicCharacteristic .
 
 :Resource rdfs:subClassOf :Physical ;
-	rdfs:comment "People or items that are necessary for the production of a finished part" .
+	rdfs:comment "Physical things necessary for the production of a Part" .
 # 
-# http://modelmeth.nist.gov/manufacturing#SinglePointCutting
-
-:SinglePointCutting a owl:Class ;
-	rdfs:subClassOf :MachiningProcess ;
-	rdfs:comment "A subtractive manufacturing process using a single point of contact to remove material" .
-# 
-# http://modelmeth.nist.gov/manufacturing#StatisticalUncertaintyOfModelParameters
+# http://modelmeth.nist.gov/modeling#StatisticalUncertaintyOfModelParameters
 
 :StatisticalUncertaintyOfModelParameters a owl:Class ;
 	rdfs:subClassOf :Uncertainty ;
 	rdfs:comment "Statistical uncertainty in the estimation of the parameters of the probabilistic sub-model. Note: Der Kuireghian types 4 and 5. [Der Kiureghian]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Symbol
+# http://modelmeth.nist.gov/modeling#SubscriptiveModel
+
+:SubscriptiveModel a owl:Class ;
+	rdfs:subClassOf :Model ;
+	owl:backwardCompatibleWith "a Model that describes intent" .
+# 
+# http://modelmeth.nist.gov/modeling#Symbol
 
 :Symbol a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "A representation of a ModelProperty" .
 # 
-# http://modelmeth.nist.gov/manufacturing#TestVars
+# http://modelmeth.nist.gov/modeling#Tool
 
-:TestVars a owl:Class .
+:Tool a owl:Class ;
+	rdfs:subClassOf :Equipment ;
+	rdfs:comment "Equipment ancillary to performing a process" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Uncertainty
+# http://modelmeth.nist.gov/modeling#Uncertainty
 
 :Uncertainty a owl:Class ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "the quantification of doubt about a measurement [S. Bell]" .
 # 
-# http://modelmeth.nist.gov/manufacturing#UncertaintySource
+# http://modelmeth.nist.gov/modeling#UncertaintySource
 
-:UncertaintySource a owl:Class .
+:UncertaintySource a owl:Class ;
+	rdfs:subClassOf :Abstract .
 # 
-# http://modelmeth.nist.gov/manufacturing#Variable
+# http://modelmeth.nist.gov/modeling#Variable
 
 :Variable a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
-	rdfs:comment "an element representing a input to a function; Variables are denoted with Symbols" .
+	rdfs:comment "a quantity denoted in a mathematical relation by a Symbol" .
 # 
-# http://modelmeth.nist.gov/manufacturing#Workpiece
+# http://modelmeth.nist.gov/modeling#Workpiece
 
 :Workpiece a owl:Class ;
-	rdfs:subClassOf :Physical ;
-	rdfs:comment "Something that is in the process of being transformed to a finished part." .
-# 
-# http://modelmeth.nist.gov/manufacturing#WorkpieceCharacteristic
-
-:WorkpieceCharacteristic a owl:Class ;
-	rdfs:subClassOf :Workpiece ;
-	rdfs:comment "Aspect of the Workpiece" .
+	rdfs:subClassOf :Part ;
+	rdfs:comment "A Part that is in the process of being transformed to a finished part." .
 # 
 # 
 # 
@@ -630,285 +657,308 @@ _:genid19 a owl:Restriction ;
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/manufacturing#Aluminum
+# http://modelmeth.nist.gov/modeling#Aluminum
 
 :Aluminum a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/manufacturing#Boring
+# http://modelmeth.nist.gov/modeling#Boring
 
-:Boring a owl:NamedIndividual , :SinglePointCutting .
+:Boring a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#CalculatedValue
+# http://modelmeth.nist.gov/modeling#CalculatedValue
 
 :CalculatedValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#CarbonToolSteel
+# http://modelmeth.nist.gov/modeling#CarbonToolSteel
 
-:CarbonToolSteel a owl:NamedIndividual , :CuttingToolMaterial .
+:CarbonToolSteel a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#CastCobaltAlloy
+# http://modelmeth.nist.gov/modeling#CastCobaltAlloy
 
-:CastCobaltAlloy a owl:NamedIndividual , :CuttingToolMaterial .
+:CastCobaltAlloy a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#CastIron
+# http://modelmeth.nist.gov/modeling#CastIron
 
 :CastIron a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/manufacturing#CementedCarbide
+# http://modelmeth.nist.gov/modeling#CementedCarbide
 
-:CementedCarbide a owl:NamedIndividual , :CuttingToolMaterial .
+:CementedCarbide a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Ceramic
+# http://modelmeth.nist.gov/modeling#Ceramic
 
-:Ceramic a owl:NamedIndividual , :CuttingToolMaterial .
+:Ceramic a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Cermet
+# http://modelmeth.nist.gov/modeling#Cermet
 
-:Cermet a owl:NamedIndividual , :CuttingToolMaterial .
+:Cermet a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_1
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_1
 
-:Characteristic_Description_1 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_1 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:hasSymbol :phi ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_2
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_2
 
-:Characteristic_Description_2 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_2 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:isDirectlyProportionalTo :CumulativeUse ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_3
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_3
 
-:Characteristic_Description_3 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_3 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:hasSymbol :F ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_4
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_4
 
-:Characteristic_Description_4 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_4 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_5
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_5
 
-:Characteristic_Description_5 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_5 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:hasSymbol :d_i .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_6
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_6
 
-:Characteristic_Description_6 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_6 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_7
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_7
 
-:Characteristic_Description_7 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_7 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasProcessContext :Turning ;
 	:hasSymbol :w_ci ;
 	:isDirectlyProportionalTo :CuttingSpeed .
 # 
-# http://modelmeth.nist.gov/manufacturing#Characteristic_Description_8
+# http://modelmeth.nist.gov/modeling#Characteristic_Description_8
 
-:Characteristic_Description_8 a owl:NamedIndividual , :Characteristic_Description ;
+:Characteristic_Description_8 a owl:NamedIndividual , :CharacteristicDescription ;
 	:hasSymbol :theta .
 # 
-# http://modelmeth.nist.gov/manufacturing#Cost
+# http://modelmeth.nist.gov/modeling#Cost
 
 :Cost a owl:NamedIndividual , :EconomicCharacteristic .
 # 
-# http://modelmeth.nist.gov/manufacturing#CubicBoronNitride
+# http://modelmeth.nist.gov/modeling#CubicBoronNitride
 
-:CubicBoronNitride a owl:NamedIndividual , :CuttingToolMaterial .
+:CubicBoronNitride a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#CumulativeUse
+# http://modelmeth.nist.gov/modeling#CumulativeUse
 
 :CumulativeUse a owl:NamedIndividual , :ProcessCharacteristic ;
 	:hasDescription :Characteristic_Description_6 ;
 	:hasQuantityKind qudt:Time .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingFeedRate
+# http://modelmeth.nist.gov/modeling#CuttingFeedRate
 
 :CuttingFeedRate a owl:NamedIndividual , :MachiningProcessParameter , :ModelParameter ;
 	:hasQuantityKind :LinearVelocity ;
 	:hasSymbol :f .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingFluidType
+# http://modelmeth.nist.gov/modeling#CuttingFluidType
 
 :CuttingFluidType a owl:NamedIndividual , :MachiningProcessParameter .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingForce
+# http://modelmeth.nist.gov/modeling#CuttingForce
 
 :CuttingForce a owl:NamedIndividual , :ModelProperty , :ProcessCharacteristic ;
 	:hasDescription :Characteristic_Description_3 ;
 	:hasQuantityKind qudt:Force .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingForceEquation
+# http://modelmeth.nist.gov/modeling#CuttingForceEquation
 
 :CuttingForceEquation a owl:NamedIndividual , :RegressionEquation ;
 	rdfs:comment "F_i=k_c*V^(α_c)*f^(β_c)*d_i^(γ_c)*(tw,i+t)^σ_c" .
 # 
-# http://modelmeth.nist.gov/manufacturing#CuttingSpeed
+# http://modelmeth.nist.gov/modeling#CuttingSpeed
 
 :CuttingSpeed a owl:NamedIndividual , :MachiningProcessParameter , :ModelParameter ;
 	:hasQuantityKind :LinearVelocity ;
 	:hasSymbol :V .
 # 
-# http://modelmeth.nist.gov/manufacturing#D
+# http://modelmeth.nist.gov/modeling#D
 
 :D a owl:NamedIndividual , :Symbol ;
 	:representsProperty :Radius .
 # 
-# http://modelmeth.nist.gov/manufacturing#D_0
+# http://modelmeth.nist.gov/modeling#D_0
 
 :D_0 a owl:NamedIndividual , :Symbol ;
 	:representsProperty :InitialRadius .
 # 
-# http://modelmeth.nist.gov/manufacturing#DepthOfCut
+# http://modelmeth.nist.gov/modeling#DepthOfCut
 
 :DepthOfCut a owl:NamedIndividual , :ModelProperty , :ProcessCharacteristic ;
 	:hasDescription :Characteristic_Description_5 ;
 	:hasQuantityKind qudt:Length .
 # 
-# http://modelmeth.nist.gov/manufacturing#Diameter
+# http://modelmeth.nist.gov/modeling#Diameter
 
 :Diameter a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/manufacturing#Diamond
+# http://modelmeth.nist.gov/modeling#Diamond
 
-:Diamond a owl:NamedIndividual , :CuttingToolMaterial .
+:Diamond a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Drift
+# http://modelmeth.nist.gov/modeling#Drift
 
 :Drift a owl:NamedIndividual , :ProcessCharacteristic ;
 	:hasDescription :Characteristic_Description_2 ;
 	:hasQuantityKind qudt:Length .
 # 
-# http://modelmeth.nist.gov/manufacturing#Drilling
+# http://modelmeth.nist.gov/modeling#Drilling
 
-:Drilling a owl:NamedIndividual , :MultiPointCutting .
+:Drilling a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#F
+# http://modelmeth.nist.gov/modeling#F
 
 :F a owl:NamedIndividual , :Symbol ;
 	:hasProcessContext :Turning ;
 	:hasQuantityKind qudt:Force ;
 	:representsProperty :CuttingForce .
 # 
-# http://modelmeth.nist.gov/manufacturing#Facing
+# http://modelmeth.nist.gov/modeling#Facing
 
-:Facing a owl:NamedIndividual , :SinglePointCutting .
+:Facing a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#FinalDimension
+# http://modelmeth.nist.gov/modeling#FinalDimension
 
 :FinalDimension a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/manufacturing#Grinding
+# http://modelmeth.nist.gov/modeling#Grinding
 
-:Grinding a owl:NamedIndividual , :MultiPointCutting .
+:Grinding a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#HSSCobalt
+# http://modelmeth.nist.gov/modeling#HSSCobalt
 
-:HSSCobalt a owl:NamedIndividual , :CuttingToolMaterial .
+:HSSCobalt a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Height
+# http://modelmeth.nist.gov/modeling#Height
 
 :Height a owl:NamedIndividual , :PartDimension ;
 	:isInverselyProportionalTo :d_i .
 # 
-# http://modelmeth.nist.gov/manufacturing#HighSpeedSteel
+# http://modelmeth.nist.gov/modeling#HighSpeedSteel
 
-:HighSpeedSteel a owl:NamedIndividual , :CuttingToolMaterial .
+:HighSpeedSteel a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Horsepower
+# http://modelmeth.nist.gov/modeling#Horsepower
 
 :Horsepower a owl:NamedIndividual , :ProcessConstraint ;
 	:hasQuantityKind qudt:Power .
 # 
-# http://modelmeth.nist.gov/manufacturing#IndividualPartValue
+# http://modelmeth.nist.gov/modeling#IndividualPartValue
 
 :IndividualPartValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#InitialDimension
+# http://modelmeth.nist.gov/modeling#InitialDimension
 
 :InitialDimension a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/manufacturing#InitialRadius
+# http://modelmeth.nist.gov/modeling#InitialRadius
 
 :InitialRadius a owl:NamedIndividual , :ModelProperty .
 # 
-# http://modelmeth.nist.gov/manufacturing#KE
+# http://modelmeth.nist.gov/modeling#KE
 
 :KE a owl:NamedIndividual ;
 	:hasUnits :EnergyAndWork .
 # 
-# http://modelmeth.nist.gov/manufacturing#Length
+# http://modelmeth.nist.gov/modeling#Length
 
 :Length a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/manufacturing#LinearVelocity
+# http://modelmeth.nist.gov/modeling#LinearVelocity
 
 :LinearVelocity a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MachineBed
+# http://modelmeth.nist.gov/modeling#MachineBed
 
-:MachineBed a owl:NamedIndividual , :MachineCharacteristic .
+:MachineBed a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MachinePower
+# http://modelmeth.nist.gov/modeling#MachinePower
 
-:MachinePower a owl:NamedIndividual , :MachineCharacteristic .
+:MachinePower a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MachineSpindle
+# http://modelmeth.nist.gov/modeling#MachineSpindle
 
-:MachineSpindle a owl:NamedIndividual , :MachineCharacteristic .
+:MachineSpindle a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MachineToolChanger
+# http://modelmeth.nist.gov/modeling#MachineToolChanger
 
-:MachineToolChanger a owl:NamedIndividual , :MachineCharacteristic .
+:MachineToolChanger a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#Mass
+# http://modelmeth.nist.gov/modeling#Mass
 
 :Mass a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MaximumAcceptableValue
+# http://modelmeth.nist.gov/modeling#MaximumAcceptableValue
 
 :MaximumAcceptableValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#MildSteel
+# http://modelmeth.nist.gov/modeling#MildSteel
 
 :MildSteel a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/manufacturing#Milling
+# http://modelmeth.nist.gov/modeling#Milling
 
-:Milling a owl:NamedIndividual , :MultiPointCutting .
+:Milling a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#MinimumAcceptableValue
+# http://modelmeth.nist.gov/modeling#MinimumAcceptableValue
 
 :MinimumAcceptableValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#N
+# http://modelmeth.nist.gov/modeling#N
 
 :N a owl:NamedIndividual , :Symbol ;
 	rdfs:comment "Number of parts made before regrind" .
 # 
-# http://modelmeth.nist.gov/manufacturing#POD-edits-2016-09-19
+# http://modelmeth.nist.gov/modeling#OWLNamedIndividualfoo_0047
 
-:POD-edits-2016-09-19 a owl:NamedIndividual , :EditingNotes .
-# 
-# http://modelmeth.nist.gov/manufacturing#Planing
+:OWLNamedIndividualfoo_0047 a owl:NamedIndividual , :EditingNotes ;
+	rdfs:comment """Edits 2018-11-08
 
-:Planing a owl:NamedIndividual , :SinglePointCutting .
+- Cleaned up some of Ibrahim's adds (removing statistics from ontology).
+- Removed Classes of EditingNotes.
+- Created separate file for operations""" ;
+	rdfs:label "POD-edits-2016-11-08"@en .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProcessTime
+# http://modelmeth.nist.gov/modeling#POD-edits-2016-09-19
+
+:POD-edits-2016-09-19 a owl:NamedIndividual , :EditingNotes ;
+	rdfs:comment """I added Uncertainty, UncertaintySource (and its subclasses), DerivedVariable, BasicVariable, RandomVariable.
+
+Open Issues:
+ * Are ModelProperty and Variable the same thing?
+ * Are the things under UncertaintySource really sources of uncertainty or kinds of uncertainty.
+ * Attaching PhysicalModel / StatisticalModel to UncertaintySource subtypes is a MISTAKE to be fixed later.
+ * Likewise (see previous comment) ParameterMeasurementUncertainty ???
+ * What is the distinction Kuireghian is making between \"model\" and \"sub-model\" 
+    ** Is a model a composition of submodels? 
+    ** Do the sub-models need to be composable in an algebraic sense? In a procedural sense?
+ * Probably ProbabilisticModelFormUncertainty is the same as PhysicalModeModelUncertainty
+
+ * Have not yet addressed Accuracy and its relation to Uncertainty.""" .
+# 
+# http://modelmeth.nist.gov/modeling#Planing
+
+:Planing a owl:NamedIndividual .
+# 
+# http://modelmeth.nist.gov/modeling#ProcessTime
 
 :ProcessTime a owl:NamedIndividual , :ProcessCharacteristic .
 # 
-# http://modelmeth.nist.gov/manufacturing#ProcessingTimeEquation
+# http://modelmeth.nist.gov/modeling#ProcessingTimeEquation
 
 :ProcessingTimeEquation a owl:NamedIndividual , :PhysicalEquation ;
 	rdfs:comment """T_N=∑ t_c,i 
@@ -917,171 +967,171 @@ _:genid19 a owl:Restriction ;
 
 t_c,i=(πD_i¯L)/(1000Vf)""" .
 # 
-# http://modelmeth.nist.gov/manufacturing#R
+# http://modelmeth.nist.gov/modeling#R
 
 :R a owl:NamedIndividual , :Symbol .
 # 
-# http://modelmeth.nist.gov/manufacturing#Radius
+# http://modelmeth.nist.gov/modeling#Radius
 
 :Radius a owl:NamedIndividual , :ModelProperty , :PartDimension ;
 	:isInverselyProportionalTo :d_i .
 # 
-# http://modelmeth.nist.gov/manufacturing#Revenue
+# http://modelmeth.nist.gov/modeling#Revenue
 
 :Revenue a owl:NamedIndividual , :EconomicCharacteristic .
 # 
-# http://modelmeth.nist.gov/manufacturing#Shaping
+# http://modelmeth.nist.gov/modeling#Shaping
 
-:Shaping a owl:NamedIndividual , :SinglePointCutting .
+:Shaping a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#StainlessSteel
+# http://modelmeth.nist.gov/modeling#StainlessSteel
 
 :StainlessSteel a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/manufacturing#SurfaceRoughness
+# http://modelmeth.nist.gov/modeling#SurfaceRoughness
 
 :SurfaceRoughness a owl:NamedIndividual , :ModelProperty , :ProcessCharacteristic , :ProcessConstraint ;
 	:hasDescription :Characteristic_Description_1 ;
 	:hasQuantityKind qudt:Length .
 # 
-# http://modelmeth.nist.gov/manufacturing#SurfaceRoughnessEquation
+# http://modelmeth.nist.gov/modeling#SurfaceRoughnessEquation
 
 :SurfaceRoughnessEquation a owl:NamedIndividual , :RegressionEquation ;
 	rdfs:comment "Φ_i=k_r*V^(α_r)*f^(β_r)*d_i^(γ_r)*(tw,i+t)^σ_r" .
 # 
-# http://modelmeth.nist.gov/manufacturing#T_N
+# http://modelmeth.nist.gov/modeling#T_N
 
 :T_N a owl:NamedIndividual , :Symbol ;
 	:representsProperty :CumulativeUse ;
 	:hasObjectiveType "avoided_processCharacteristic" .
 # 
-# http://modelmeth.nist.gov/manufacturing#TargetValue
+# http://modelmeth.nist.gov/modeling#TargetValue
 
 :TargetValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#Temperature
+# http://modelmeth.nist.gov/modeling#Temperature
 
 :Temperature a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/manufacturing#ToolAngle
+# http://modelmeth.nist.gov/modeling#ToolAngle
 
 :ToolAngle a owl:NamedIndividual , :MachiningProcessParameter ;
 	:hasDescription :Characteristic_Description_8 .
 # 
-# http://modelmeth.nist.gov/manufacturing#ToolWear
+# http://modelmeth.nist.gov/modeling#ToolWear
 
 :ToolWear a owl:NamedIndividual , :ModelProperty , :ProcessCharacteristic ;
 	:hasDescription :Characteristic_Description_4 ;
 	:hasQuantityKind qudt:Length .
 # 
-# http://modelmeth.nist.gov/manufacturing#ToolWearEquation
+# http://modelmeth.nist.gov/modeling#ToolWearEquation
 
 :ToolWearEquation a owl:NamedIndividual , :RegressionEquation ;
 	rdfs:comment "w_i=k_w*V^(α_w)*f^(β_w)*d_i^(γ_w)*(tw,i+t)^(σ_w)" .
 # 
-# http://modelmeth.nist.gov/manufacturing#TotalProcessValue
+# http://modelmeth.nist.gov/modeling#TotalProcessValue
 
 :TotalProcessValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/manufacturing#Turning
+# http://modelmeth.nist.gov/modeling#Turning
 
-:Turning a owl:NamedIndividual , :SinglePointCutting ;
+:Turning a owl:NamedIndividual ;
 	:hasDuration :T_N ;
 	:hasFeedRate :f ;
 	:hasProcessContext :Turning ;
 	:referencesProperty :CuttingFeedRate , :CuttingForce , :CuttingSpeed , :DepthOfCut , :InitialRadius , :Radius , :SurfaceRoughness , :ToolWear ;
 	rdfs:comment "POD Temporary" .
 # 
-# http://modelmeth.nist.gov/manufacturing#TurningOptimization
+# http://modelmeth.nist.gov/modeling#TurningOptimization
 
 :TurningOptimization a owl:NamedIndividual , :Model ;
 	:referencesEquation :CuttingForceEquation , :ProcessingTimeEquation , :SurfaceRoughnessEquation , :ToolWearEquation .
 # 
-# http://modelmeth.nist.gov/manufacturing#V
+# http://modelmeth.nist.gov/modeling#V
 
 :V a owl:NamedIndividual , :Symbol ;
 	:hasProcessContext :Turning ;
 	:representsProperty :CuttingSpeed .
 # 
-# http://modelmeth.nist.gov/manufacturing#W_hat
+# http://modelmeth.nist.gov/modeling#W_hat
 
 :W_hat a owl:NamedIndividual , :Symbol .
 # 
-# http://modelmeth.nist.gov/manufacturing#W_i
+# http://modelmeth.nist.gov/modeling#W_i
 
 :W_i a owl:NamedIndividual , :Symbol ;
 	:representsProperty :ToolWear .
 # 
-# http://modelmeth.nist.gov/manufacturing#WorkpieceDimension
+# http://modelmeth.nist.gov/modeling#WorkpieceDimension
 
 :WorkpieceDimension a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/manufacturing#X_1
+# http://modelmeth.nist.gov/modeling#X_1
 
-:X_1 a owl:NamedIndividual , :TestVars ;
+:X_1 a owl:NamedIndividual ;
 	:hasUnits :Kilogram .
 # 
-# http://modelmeth.nist.gov/manufacturing#Y
+# http://modelmeth.nist.gov/modeling#Y
 
-:Y a owl:NamedIndividual , :TestVars ;
+:Y a owl:NamedIndividual ;
 	:hasUnits :Newton .
 # 
-# http://modelmeth.nist.gov/manufacturing#Z
+# http://modelmeth.nist.gov/modeling#Z
 
 :Z a owl:NamedIndividual , :ObjectiveFunction ;
 	:hasObjectiveType "sought_characteristic" ;
 	rdfs:comment "Z=P/(N*t_h+T_N)" .
 # 
-# http://modelmeth.nist.gov/manufacturing#beta_1
+# http://modelmeth.nist.gov/modeling#beta_1
 
-:beta_1 a owl:NamedIndividual , :TestVars ;
+:beta_1 a owl:NamedIndividual ;
 	:hasUnits :MeterPerSecondSquared .
 # 
-# http://modelmeth.nist.gov/manufacturing#cuttingInsert
+# http://modelmeth.nist.gov/modeling#cuttingInsert
 
 :cuttingInsert a owl:NamedIndividual , :CuttingInsert ;
 	:hasProcessContext :Turning .
 # 
-# http://modelmeth.nist.gov/manufacturing#d_i
+# http://modelmeth.nist.gov/modeling#d_i
 
 :d_i a owl:NamedIndividual , :Symbol ;
 	:hasProcessContext :Turning ;
 	:representsProperty :DepthOfCut .
 # 
-# http://modelmeth.nist.gov/manufacturing#f
+# http://modelmeth.nist.gov/modeling#f
 
 :f a owl:NamedIndividual , :Symbol ;
 	:hasProcessContext :Turning ;
 	:representsProperty :CuttingFeedRate .
 # 
-# http://modelmeth.nist.gov/manufacturing#m_1
+# http://modelmeth.nist.gov/modeling#m_1
 
-:m_1 a owl:NamedIndividual , :TestVars ;
+:m_1 a owl:NamedIndividual ;
 	:hasUnits :Mass .
 # 
-# http://modelmeth.nist.gov/manufacturing#phi
+# http://modelmeth.nist.gov/modeling#phi
 
 :phi a owl:NamedIndividual , :Symbol ;
 	:hasProcessContext :Turning ;
 	:representsProperty :SurfaceRoughness ;
 	:hasObjectiveType "avoided_processCharacteristic" .
 # 
-# http://modelmeth.nist.gov/manufacturing#t_c
+# http://modelmeth.nist.gov/modeling#t_c
 
 :t_c a owl:NamedIndividual , :Symbol ;
 	:hasObjectiveType "avoided_processCharacteristic" .
 # 
-# http://modelmeth.nist.gov/manufacturing#theta
+# http://modelmeth.nist.gov/modeling#theta
 
 :theta a owl:NamedIndividual , :Symbol ;
 	:representsProperty :ToolAngle .
 # 
-# http://modelmeth.nist.gov/manufacturing#v_1
+# http://modelmeth.nist.gov/modeling#v_1
 
-:v_1 a owl:NamedIndividual , :TestVars ;
+:v_1 a owl:NamedIndividual ;
 	:hasUnits :LinearVelocity .
 # 
-# http://modelmeth.nist.gov/manufacturing#w_ci
+# http://modelmeth.nist.gov/modeling#w_ci
 
 :w_ci a owl:NamedIndividual , :Symbol .
 # 
@@ -1131,19 +1181,7 @@ unit:USDollar a owl:NamedIndividual .
 # 
 # 
 
-:POD-edits-2016-09-19 rdfs:comment """I added Uncertainty, UncertaintySource (and its subclasses), DerivedVariable, BasicVariable, RandomVariable.
-
-Open Issues:
- * Are ModelProperty and Variable the same thing?
- * Are the things under UncertaintySource really sources of uncertainty or kinds of uncertainty.
- * Attaching PhysicalModel / StatisticalModel to UncertaintySource subtypes is a MISTAKE to be fixed later.
- * Likewise (see previous comment) ParameterMeasurementUncertainty ???
- * What is the distinction Kuireghian is making between \"model\" and \"sub-model\" 
-    ** Is a model a composition of submodels? 
-    ** Do the sub-models need to be composable in an algebraic sense? In a procedural sense?
- * Probably ProbabilisticModelFormUncertainty is the same as PhysicalModeModelUncertainty
-
- * Have not yet addressed Accuracy and its relation to Uncertainty.""" .
+:Cost rdfs:comment "a disadvantage incurred" .
 # 
 # 
 # 
@@ -1155,75 +1193,75 @@ Open Issues:
 # 
 # 
 
-_:genid20 a owl:AllDifferent ;
-	owl:distinctMembers _:genid22 .
+_:genid21 a owl:AllDifferent ;
+	owl:distinctMembers _:genid23 .
+
+_:genid23 a rdf:List ;
+	rdf:first :Aluminum ;
+	rdf:rest _:genid22 .
 
 _:genid22 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid21 .
-
-_:genid21 a rdf:List ;
 	rdf:first :CastIron ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid23 a owl:AllDifferent ;
-	owl:distinctMembers _:genid25 .
+_:genid24 a owl:AllDifferent ;
+	owl:distinctMembers _:genid26 .
+
+_:genid26 a rdf:List ;
+	rdf:first :Aluminum ;
+	rdf:rest _:genid25 .
 
 _:genid25 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid24 .
-
-_:genid24 a rdf:List ;
 	rdf:first :MildSteel ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid26 a owl:AllDifferent ;
-	owl:distinctMembers _:genid28 .
+_:genid27 a owl:AllDifferent ;
+	owl:distinctMembers _:genid29 .
+
+_:genid29 a rdf:List ;
+	rdf:first :Aluminum ;
+	rdf:rest _:genid28 .
 
 _:genid28 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid27 .
-
-_:genid27 a rdf:List ;
 	rdf:first :StainlessSteel ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid29 a owl:AllDifferent ;
-	owl:distinctMembers _:genid31 .
+_:genid30 a owl:AllDifferent ;
+	owl:distinctMembers _:genid32 .
+
+_:genid32 a rdf:List ;
+	rdf:first :CastIron ;
+	rdf:rest _:genid31 .
 
 _:genid31 a rdf:List ;
-	rdf:first :CastIron ;
-	rdf:rest _:genid30 .
-
-_:genid30 a rdf:List ;
 	rdf:first :MildSteel ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid32 a owl:AllDifferent ;
-	owl:distinctMembers _:genid34 .
+_:genid33 a owl:AllDifferent ;
+	owl:distinctMembers _:genid35 .
+
+_:genid35 a rdf:List ;
+	rdf:first :CastIron ;
+	rdf:rest _:genid34 .
 
 _:genid34 a rdf:List ;
-	rdf:first :CastIron ;
-	rdf:rest _:genid33 .
-
-_:genid33 a rdf:List ;
 	rdf:first :StainlessSteel ;
 	rdf:rest rdf:nil .
 # 
 
-_:genid35 a owl:AllDifferent ;
-	owl:distinctMembers _:genid37 .
+_:genid36 a owl:AllDifferent ;
+	owl:distinctMembers _:genid38 .
+
+_:genid38 a rdf:List ;
+	rdf:first :MildSteel ;
+	rdf:rest _:genid37 .
 
 _:genid37 a rdf:List ;
-	rdf:first :MildSteel ;
-	rdf:rest _:genid36 .
-
-_:genid36 a rdf:List ;
 	rdf:first :StainlessSteel ;
 	rdf:rest rdf:nil .
 # 
-# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
+# Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi
