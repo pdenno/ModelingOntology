@@ -411,7 +411,7 @@ _:genid13 a owl:Restriction ;
 :ModelProperty a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	owl:disjointWith :Symbol ;
-	rdfs:comment "A characteristic that affects calculations and decisions made in a specific model" .
+	rdfs:comment "A property describing some aspect of a model" .
 # 
 # http://modelmeth.nist.gov/modeling#ModelPropertyMeasurementUncertainty
 
