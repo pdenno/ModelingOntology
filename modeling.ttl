@@ -222,7 +222,7 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#BasicVariable
 
 :BasicVariable a owl:Class ;
-	rdfs:subClassOf :Variable ;
+	rdfs:subClassOf :ModelProperty ;
 	owl:disjointWith :DerivedVariable ;
 	rdfs:comment "a Variable that corresponds to a Property that can be directly measured. Note: an individual may be both a BasicVariable and a RandomVariable." .
 # 
@@ -235,7 +235,7 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#CausalViewpointVariable
 
 :CausalViewpointVariable a owl:Class ;
-	rdfs:subClassOf :Variable .
+	rdfs:subClassOf :ModelProperty .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic
 
@@ -287,7 +287,7 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#DerivedVariable
 
 :DerivedVariable a owl:Class ;
-	rdfs:subClassOf :Variable ;
+	rdfs:subClassOf :ModelProperty ;
 	rdfs:comment "a Variable that corresponds to a Property that cannot be directly measured, but is known only through its relationship with other Variables." .
 # 
 # http://modelmeth.nist.gov/modeling#DiscreteEventSimulation
@@ -411,7 +411,7 @@ _:genid13 a owl:Restriction ;
 :ModelProperty a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	owl:disjointWith :Symbol ;
-	rdfs:comment "A property describing some aspect of a model" .
+	rdfs:comment "A property describing some aspect of a model. NOTE: It may be denoted in a mathematical relation by a Symbol." .
 # 
 # http://modelmeth.nist.gov/modeling#ModelPropertyMeasurementUncertainty
 
@@ -635,12 +635,6 @@ _:genid20 a owl:Restriction ;
 
 :UncertaintySource a owl:Class ;
 	rdfs:subClassOf :Abstract .
-# 
-# http://modelmeth.nist.gov/modeling#Variable
-
-:Variable a owl:Class ;
-	rdfs:subClassOf :ModelAbstraction ;
-	rdfs:comment "a quantity denoted in a mathematical relation by a Symbol" .
 # 
 # http://modelmeth.nist.gov/modeling#Workpiece
 
