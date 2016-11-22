@@ -16,25 +16,33 @@
 # #################################################################
 # 
 # 
-# http://modelmeth.nist.gov/modeling#PredictiveModel
+# http://modelmeth.nist.gov/operations#BlockingProbability
 
-<http://modelmeth.nist.gov/modeling#PredictiveModel> owl:disjointWith <http://modelmeth.nist.gov/modeling#SubscriptiveModel> .
+:BlockingProbability a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the probability that a machine cannot continue to be process parts because its downstream buffer is full" ;
+	rdfs:label "Probability of Blocking" .
 # 
-# http://modelmeth.nist.gov/modeling#SubscriptiveModel
-# 
-# http://modelmeth.nist.gov/operations#DiscreteEventSimulation
+# http://modelmeth.nist.gov/operations#BreakDownRate
 
-:DiscreteEventSimulation a owl:Class ;
-	rdfs:subClassOf :ModelTechnology ;
-	rdfs:comment "a Monte Carlo simulation where stochastic variables are time-based." ;
-	rdfs:label "Discrete Event Simulation" .
+:BreakDownRate a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the rate (average) at which the machine is switching to non-operational status" ;
+	rdfs:label "Machine Breakdown Rate" .
 # 
-# http://modelmeth.nist.gov/operations#FiniteElementMethod
+# http://modelmeth.nist.gov/operations#BufferSize
 
-:FiniteElementMethod a owl:Class ;
-	rdfs:subClassOf :ModelTechnology ;
-	rdfs:comment "the method of finite element analyses, a numerical technique for finding approximate solutions to boundary value problems for partial differential equations. (Wikipedia)" ;
-	rdfs:label "Finite Element Method" .
+:BufferSize a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the capacity (in parts) of the queue onto which the machine places finished work" ;
+	rdfs:label "Buffer Size" .
+# 
+# http://modelmeth.nist.gov/operations#Jobtype
+
+:Jobtype a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "a denotation for a process followed by a class of products" ;
+	rdfs:label "Job Type" .
 # 
 # http://modelmeth.nist.gov/operations#Machine
 
@@ -42,11 +50,12 @@
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#Equipment> ;
 	rdfs:comment "Equipment containing one or more parts that uses energy to perform an intended action. (Wikipedia)" .
 # 
-# http://modelmeth.nist.gov/operations#ModelTechnology
+# http://modelmeth.nist.gov/operations#MultiJobProduction
 
-:ModelTechnology a owl:Class ;
-	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#ModelAbstraction> ;
-	rdfs:comment "the technology used to represent the model and make inferences from it" .
+:MultiJobProduction a owl:Class ;
+	rdfs:subClassOf :ProductionSystemViewpoint ;
+	rdfs:comment "a production system model representing a series of machines connect through buffers and producing potential many part types." ;
+	rdfs:label "Multi Job Production" .
 # 
 # http://modelmeth.nist.gov/operations#OWLClass_00002
 
@@ -61,11 +70,74 @@
 	rdfs:comment "the number of finished products produced by the production system per unit time." ;
 	rdfs:label "Throughput"@en .
 # 
-# http://modelmeth.nist.gov/operations#SingleJobProductionAnalyticalModel
+# http://modelmeth.nist.gov/operations#ProductionSystemMachine
 
-:SingleJobProductionAnalyticalModel a owl:Class ;
+:ProductionSystemMachine a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "an abstraction over the equipment dedicated to performing operations. NOTE: a Machine is characterized by a Machine Repair Rate, Machine Breakdown Rate, and Machine Work Capacity. Upstream and downstream Buffers may be associated with a Machine." ;
+	rdfs:label "Machine" .
+# 
+# http://modelmeth.nist.gov/operations#ProductionSystemViewpoint
+
+:ProductionSystemViewpoint a owl:Class ;
+	rdfs:subClassOf :ModelDomainViewpoint ;
+	rdfs:comment "a ModelDomainViewpoint concerning a production system and its performance characteristics" ;
+	rdfs:label "Production System Viewpoint" .
+# 
+# http://modelmeth.nist.gov/operations#RepairRate
+
+:RepairRate a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the rate (average) at which the machine is brought back to operational status" ;
+	rdfs:label "Machine Repair Rate" .
+# 
+# http://modelmeth.nist.gov/operations#ResidenceTime
+
+:ResidenceTime a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the amount of time a part remains in the system" ;
+	rdfs:label "Residence Time" .
+# 
+# http://modelmeth.nist.gov/operations#SJPanalyticalModel
+
+:SJPanalyticalModel a owl:Class ;
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#AnalyticalModel> ;
 	rdfs:comment "an AnalyticalModel of a production system describing its performance characteristics. The production system consists of a series of machines through which a single Part (job type) flow." .
+# 
+# http://modelmeth.nist.gov/operations#SingleJobProduction
+
+:SingleJobProduction a owl:Class ;
+	rdfs:subClassOf :ProductionSystemViewpoint ;
+	rdfs:comment "a production system model representing a series of machines connect through buffers and producing a single part type." ;
+	rdfs:label "Single Job Production" .
+# 
+# http://modelmeth.nist.gov/operations#StarvationProbability
+
+:StarvationProbability a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the probability that a machine has stopped processing parts because it does not have a part t o process -- its upstream buffer is empty" ;
+	rdfs:label "Probability of Starving" .
+# 
+# http://modelmeth.nist.gov/operations#WorkCapacity
+
+:WorkCapacity a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the amount of work that the machine can do per unit time. NOTE: the processing time of a JobType on a machine is the JobType's Work Requirement divided by the Machine Work Capacity." ;
+	rdfs:label "Machine Work Capacity" .
+# 
+# http://modelmeth.nist.gov/operations#WorkInProcess
+
+:WorkInProcess a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the amount of parts currently being process and waiting in Buffers to be processed" ;
+	rdfs:label "Work In Process" .
+# 
+# http://modelmeth.nist.gov/operations#WorkRequirement
+
+:WorkRequirement a owl:Class ;
+	rdfs:subClassOf :OWLClass_00002 ;
+	rdfs:comment "the time required to perform the operations performed on the machine" ;
+	rdfs:label "Job Type Work Requirement at Machine" .
 # 
 # 
 # 
@@ -78,7 +150,7 @@
 # 
 # http://modelmeth.nist.gov/operations#ExampleSJPmodel
 
-:ExampleSJPmodel a owl:NamedIndividual , :SingleJobProductionAnalyticalModel .
+:ExampleSJPmodel a owl:NamedIndividual , :SJPanalyticalModel .
 # 
 # http://modelmeth.nist.gov/operations#OWLNamedIndividual_00001
 
@@ -87,7 +159,7 @@
 # 
 # http://modelmeth.nist.gov/operations#OWLNamedIndividual_00004
 
-:OWLNamedIndividual_00004 a owl:NamedIndividual , :SingleJobProductionAnalyticalModel ;
+:OWLNamedIndividual_00004 a owl:NamedIndividual , :SJPanalyticalModel ;
 	rdfs:label "model1"@en .
 # 
 # Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi

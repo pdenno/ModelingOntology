@@ -499,6 +499,7 @@ _:genid15 a owl:Restriction ;
 
 :PredictiveModel a owl:Class ;
 	rdfs:subClassOf :Model ;
+	owl:disjointWith :SubscriptiveModel ;
 	rdfs:comment "a Model that, given a set of initial circumstances, describes likely outcomes" .
 # 
 # http://modelmeth.nist.gov/modeling#ProbabilisticModel
@@ -641,6 +642,31 @@ _:genid20 a owl:Restriction ;
 :Workpiece a owl:Class ;
 	rdfs:subClassOf :Part ;
 	rdfs:comment "A Part that is in the process of being transformed to a finished part." .
+# 
+# http://modelmeth.nist.gov/operations#DiscreteEventSimulation
+
+<http://modelmeth.nist.gov/operations#DiscreteEventSimulation> a owl:Class ;
+	rdfs:subClassOf <http://modelmeth.nist.gov/operations#ModelTechnology> ;
+	rdfs:comment "a Monte Carlo simulation where stochastic variables are time-based." ;
+	rdfs:label "Discrete Event Simulation" .
+# 
+# http://modelmeth.nist.gov/operations#FiniteElementMethod
+
+<http://modelmeth.nist.gov/operations#FiniteElementMethod> a owl:Class ;
+	rdfs:subClassOf <http://modelmeth.nist.gov/operations#ModelTechnology> ;
+	rdfs:comment "the method of finite element analyses, a numerical technique for finding approximate solutions to boundary value problems for partial differential equations. (Wikipedia)" ;
+	rdfs:label "Finite Element Method" .
+# 
+# http://modelmeth.nist.gov/operations#ModelDomainViewpoint
+
+<http://modelmeth.nist.gov/operations#ModelDomainViewpoint> a owl:Class ;
+	rdfs:subClassOf :ModelAbstraction .
+# 
+# http://modelmeth.nist.gov/operations#ModelTechnology
+
+<http://modelmeth.nist.gov/operations#ModelTechnology> a owl:Class ;
+	rdfs:subClassOf :ModelAbstraction ;
+	rdfs:comment "the technology used to represent the model and make inferences from it" .
 # 
 # 
 # 
