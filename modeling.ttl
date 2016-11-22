@@ -387,7 +387,7 @@ _:genid13 a owl:Restriction ;
 
 :Model a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
-	rdfs:comment "A simulation of a manufacturing process" .
+	rdfs:comment "an abstraction expressed formally to aid in planning or investigating" .
 # 
 # http://modelmeth.nist.gov/modeling#ModelAbstraction
 
@@ -675,77 +675,49 @@ _:genid20 a owl:Restriction ;
 
 :CastIron a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/modeling#CementedCarbide
-
-:CementedCarbide a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Ceramic
-
-:Ceramic a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Cermet
-
-:Cermet a owl:NamedIndividual .
-# 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_1
 
 :Characteristic_Description_1 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
-	:hasSymbol :phi ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_2
 
 :Characteristic_Description_2 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
 	:isDirectlyProportionalTo :CumulativeUse ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_3
 
 :Characteristic_Description_3 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
-	:hasSymbol :F ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_4
 
 :Characteristic_Description_4 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
 	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
 	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_5
 
-:Characteristic_Description_5 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
-	:hasSymbol :d_i .
+:Characteristic_Description_5 a owl:NamedIndividual , :CharacteristicDescription .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_6
 
-:Characteristic_Description_6 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning .
+:Characteristic_Description_6 a owl:NamedIndividual , :CharacteristicDescription .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_7
 
 :Characteristic_Description_7 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasProcessContext :Turning ;
-	:hasSymbol :w_ci ;
 	:isDirectlyProportionalTo :CuttingSpeed .
 # 
 # http://modelmeth.nist.gov/modeling#Characteristic_Description_8
 
-:Characteristic_Description_8 a owl:NamedIndividual , :CharacteristicDescription ;
-	:hasSymbol :theta .
+:Characteristic_Description_8 a owl:NamedIndividual , :CharacteristicDescription .
 # 
 # http://modelmeth.nist.gov/modeling#Cost
 
 :Cost a owl:NamedIndividual , :EconomicCharacteristic .
-# 
-# http://modelmeth.nist.gov/modeling#CubicBoronNitride
-
-:CubicBoronNitride a owl:NamedIndividual .
 # 
 # http://modelmeth.nist.gov/modeling#CumulativeUse
 
@@ -756,8 +728,7 @@ _:genid20 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#CuttingFeedRate
 
 :CuttingFeedRate a owl:NamedIndividual , :MachiningProcessParameter , :ModelParameter ;
-	:hasQuantityKind :LinearVelocity ;
-	:hasSymbol :f .
+	:hasQuantityKind :LinearVelocity .
 # 
 # http://modelmeth.nist.gov/modeling#CuttingFluidType
 
@@ -777,18 +748,7 @@ _:genid20 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#CuttingSpeed
 
 :CuttingSpeed a owl:NamedIndividual , :MachiningProcessParameter , :ModelParameter ;
-	:hasQuantityKind :LinearVelocity ;
-	:hasSymbol :V .
-# 
-# http://modelmeth.nist.gov/modeling#D
-
-:D a owl:NamedIndividual , :Symbol ;
-	:representsProperty :Radius .
-# 
-# http://modelmeth.nist.gov/modeling#D_0
-
-:D_0 a owl:NamedIndividual , :Symbol ;
-	:representsProperty :InitialRadius .
+	:hasQuantityKind :LinearVelocity .
 # 
 # http://modelmeth.nist.gov/modeling#DepthOfCut
 
@@ -810,41 +770,13 @@ _:genid20 a owl:Restriction ;
 	:hasDescription :Characteristic_Description_2 ;
 	:hasQuantityKind qudt:Length .
 # 
-# http://modelmeth.nist.gov/modeling#Drilling
-
-:Drilling a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#F
-
-:F a owl:NamedIndividual , :Symbol ;
-	:hasProcessContext :Turning ;
-	:hasQuantityKind qudt:Force ;
-	:representsProperty :CuttingForce .
-# 
-# http://modelmeth.nist.gov/modeling#Facing
-
-:Facing a owl:NamedIndividual .
-# 
 # http://modelmeth.nist.gov/modeling#FinalDimension
 
 :FinalDimension a owl:NamedIndividual , :PartDimension .
 # 
-# http://modelmeth.nist.gov/modeling#Grinding
-
-:Grinding a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#HSSCobalt
-
-:HSSCobalt a owl:NamedIndividual .
-# 
 # http://modelmeth.nist.gov/modeling#Height
 
-:Height a owl:NamedIndividual , :PartDimension ;
-	:isInverselyProportionalTo :d_i .
-# 
-# http://modelmeth.nist.gov/modeling#HighSpeedSteel
-
-:HighSpeedSteel a owl:NamedIndividual .
+:Height a owl:NamedIndividual , :PartDimension .
 # 
 # http://modelmeth.nist.gov/modeling#Horsepower
 
@@ -876,22 +808,6 @@ _:genid20 a owl:Restriction ;
 
 :LinearVelocity a owl:NamedIndividual .
 # 
-# http://modelmeth.nist.gov/modeling#MachineBed
-
-:MachineBed a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MachinePower
-
-:MachinePower a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MachineSpindle
-
-:MachineSpindle a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MachineToolChanger
-
-:MachineToolChanger a owl:NamedIndividual .
-# 
 # http://modelmeth.nist.gov/modeling#Mass
 
 :Mass a owl:NamedIndividual .
@@ -904,18 +820,9 @@ _:genid20 a owl:Restriction ;
 
 :MildSteel a owl:NamedIndividual , :Alloy .
 # 
-# http://modelmeth.nist.gov/modeling#Milling
-
-:Milling a owl:NamedIndividual .
-# 
 # http://modelmeth.nist.gov/modeling#MinimumAcceptableValue
 
 :MinimumAcceptableValue a owl:NamedIndividual , :Modifier .
-# 
-# http://modelmeth.nist.gov/modeling#N
-
-:N a owl:NamedIndividual , :Symbol ;
-	rdfs:comment "Number of parts made before regrind" .
 # 
 # http://modelmeth.nist.gov/modeling#OWLNamedIndividualfoo_0047
 
@@ -961,14 +868,9 @@ Open Issues:
 
 t_c,i=(πD_i¯L)/(1000Vf)""" .
 # 
-# http://modelmeth.nist.gov/modeling#R
-
-:R a owl:NamedIndividual , :Symbol .
-# 
 # http://modelmeth.nist.gov/modeling#Radius
 
-:Radius a owl:NamedIndividual , :ModelProperty , :PartDimension ;
-	:isInverselyProportionalTo :d_i .
+:Radius a owl:NamedIndividual , :ModelProperty , :PartDimension .
 # 
 # http://modelmeth.nist.gov/modeling#Revenue
 
@@ -993,12 +895,6 @@ t_c,i=(πD_i¯L)/(1000Vf)""" .
 :SurfaceRoughnessEquation a owl:NamedIndividual , :RegressionEquation ;
 	rdfs:comment "Φ_i=k_r*V^(α_r)*f^(β_r)*d_i^(γ_r)*(tw,i+t)^σ_r" .
 # 
-# http://modelmeth.nist.gov/modeling#T_N
-
-:T_N a owl:NamedIndividual , :Symbol ;
-	:representsProperty :CumulativeUse ;
-	:hasObjectiveType "avoided_processCharacteristic" .
-# 
 # http://modelmeth.nist.gov/modeling#TargetValue
 
 :TargetValue a owl:NamedIndividual , :Modifier .
@@ -1021,40 +917,16 @@ t_c,i=(πD_i¯L)/(1000Vf)""" .
 # http://modelmeth.nist.gov/modeling#ToolWearEquation
 
 :ToolWearEquation a owl:NamedIndividual , :RegressionEquation ;
-	rdfs:comment "w_i=k_w*V^(α_w)*f^(β_w)*d_i^(γ_w)*(tw,i+t)^(σ_w)" .
+	rdfs:isDefinedBy "w_i=k_w*V^(α_w)*f^(β_w)*d_i^(γ_w)*(tw,i+t)^(σ_w)" .
 # 
 # http://modelmeth.nist.gov/modeling#TotalProcessValue
 
 :TotalProcessValue a owl:NamedIndividual , :Modifier .
 # 
-# http://modelmeth.nist.gov/modeling#Turning
-
-:Turning a owl:NamedIndividual ;
-	:hasDuration :T_N ;
-	:hasFeedRate :f ;
-	:hasProcessContext :Turning ;
-	:referencesProperty :CuttingFeedRate , :CuttingForce , :CuttingSpeed , :DepthOfCut , :InitialRadius , :Radius , :SurfaceRoughness , :ToolWear ;
-	rdfs:comment "POD Temporary" .
-# 
 # http://modelmeth.nist.gov/modeling#TurningOptimization
 
 :TurningOptimization a owl:NamedIndividual , :Model ;
 	:referencesEquation :CuttingForceEquation , :ProcessingTimeEquation , :SurfaceRoughnessEquation , :ToolWearEquation .
-# 
-# http://modelmeth.nist.gov/modeling#V
-
-:V a owl:NamedIndividual , :Symbol ;
-	:hasProcessContext :Turning ;
-	:representsProperty :CuttingSpeed .
-# 
-# http://modelmeth.nist.gov/modeling#W_hat
-
-:W_hat a owl:NamedIndividual , :Symbol .
-# 
-# http://modelmeth.nist.gov/modeling#W_i
-
-:W_i a owl:NamedIndividual , :Symbol ;
-	:representsProperty :ToolWear .
 # 
 # http://modelmeth.nist.gov/modeling#WorkpieceDimension
 
@@ -1083,51 +955,12 @@ t_c,i=(πD_i¯L)/(1000Vf)""" .
 # 
 # http://modelmeth.nist.gov/modeling#cuttingInsert
 
-:cuttingInsert a owl:NamedIndividual , :CuttingInsert ;
-	:hasProcessContext :Turning .
-# 
-# http://modelmeth.nist.gov/modeling#d_i
-
-:d_i a owl:NamedIndividual , :Symbol ;
-	:hasProcessContext :Turning ;
-	:representsProperty :DepthOfCut .
-# 
-# http://modelmeth.nist.gov/modeling#f
-
-:f a owl:NamedIndividual , :Symbol ;
-	:hasProcessContext :Turning ;
-	:representsProperty :CuttingFeedRate .
+:cuttingInsert a owl:NamedIndividual , :CuttingInsert .
 # 
 # http://modelmeth.nist.gov/modeling#m_1
 
 :m_1 a owl:NamedIndividual ;
 	:hasUnits :Mass .
-# 
-# http://modelmeth.nist.gov/modeling#phi
-
-:phi a owl:NamedIndividual , :Symbol ;
-	:hasProcessContext :Turning ;
-	:representsProperty :SurfaceRoughness ;
-	:hasObjectiveType "avoided_processCharacteristic" .
-# 
-# http://modelmeth.nist.gov/modeling#t_c
-
-:t_c a owl:NamedIndividual , :Symbol ;
-	:hasObjectiveType "avoided_processCharacteristic" .
-# 
-# http://modelmeth.nist.gov/modeling#theta
-
-:theta a owl:NamedIndividual , :Symbol ;
-	:representsProperty :ToolAngle .
-# 
-# http://modelmeth.nist.gov/modeling#v_1
-
-:v_1 a owl:NamedIndividual ;
-	:hasUnits :LinearVelocity .
-# 
-# http://modelmeth.nist.gov/modeling#w_ci
-
-:w_ci a owl:NamedIndividual , :Symbol .
 # 
 # http://qudt.org/1.1/schema/qudt#Dimensionless
 
