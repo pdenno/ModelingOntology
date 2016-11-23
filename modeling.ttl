@@ -643,6 +643,13 @@ _:genid20 a owl:Restriction ;
 	rdfs:subClassOf :Part ;
 	rdfs:comment "A Part that is in the process of being transformed to a finished part." .
 # 
+# http://modelmeth.nist.gov/operations#DefinedVariable
+
+<http://modelmeth.nist.gov/operations#DefinedVariable> a owl:Class ;
+	rdfs:subClassOf :CausalViewpointVariable ;
+	rdfs:comment "a CausalViewpointVariable that is provided a definition as a function of other CausalViewpointVariables." ;
+	rdfs:label "Defined Variable" .
+# 
 # http://modelmeth.nist.gov/operations#DiscreteEventSimulation
 
 <http://modelmeth.nist.gov/operations#DiscreteEventSimulation> a owl:Class ;
@@ -661,6 +668,13 @@ _:genid20 a owl:Restriction ;
 
 <http://modelmeth.nist.gov/operations#ModelDomainViewpoint> a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction .
+# 
+# http://modelmeth.nist.gov/operations#ModelEntity
+
+<http://modelmeth.nist.gov/operations#ModelEntity> a owl:Class ;
+	rdfs:subClassOf :ModelAbstraction ;
+	rdfs:comment "an object modeled. Example: In a model of a production system, the machines and buffers may be Modeled Entities." ;
+	rdfs:label "Modeled Entity" .
 # 
 # http://modelmeth.nist.gov/operations#ModelTechnology
 
