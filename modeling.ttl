@@ -90,38 +90,11 @@ _:genid9 a rdf:List ;
 :hasCost a owl:ObjectProperty ;
 	rdfs:domain :Resource .
 # 
-# http://modelmeth.nist.gov/modeling#hasDescription
+# http://modelmeth.nist.gov/modeling#hasObjective
 
-:hasDescription a owl:ObjectProperty .
-# 
-# http://modelmeth.nist.gov/modeling#hasDuration
-
-:hasDuration a owl:ObjectProperty ;
-	rdfs:domain <http://modelmeth.nist.gov/operations#ProcessOccurrence> .
-# 
-# http://modelmeth.nist.gov/modeling#hasFeedRate
-
-:hasFeedRate a owl:ObjectProperty , owl:FunctionalProperty .
-# 
-# http://modelmeth.nist.gov/modeling#hasFinishedPart
-
-:hasFinishedPart a owl:ObjectProperty ;
-	owl:inverseOf :hasWorkpiece ;
-	a owl:FunctionalProperty , owl:AsymmetricProperty .
-# 
-# http://modelmeth.nist.gov/modeling#hasMaterialType
-
-:hasMaterialType a owl:ObjectProperty ;
-	rdfs:domain _:genid11 .
-
-_:genid11 a owl:Restriction ;
-	owl:onProperty :hasMaterialType ;
-	owl:someValuesFrom :Physical .
-# 
-# http://modelmeth.nist.gov/modeling#hasProcessCharacteristic
-
-:hasProcessCharacteristic a owl:ObjectProperty ;
-	owl:inverseOf :hasProcessContext .
+:hasObjective a owl:ObjectProperty ;
+	rdfs:domain :ObjectiveFunction ;
+	rdfs:range :Objective .
 # 
 # http://modelmeth.nist.gov/modeling#hasProcessContext
 
@@ -135,10 +108,6 @@ _:genid11 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#hasSymbol
 
 :hasSymbol a owl:ObjectProperty .
-# 
-# http://modelmeth.nist.gov/modeling#hasWorkpiece
-
-:hasWorkpiece a owl:ObjectProperty , owl:InverseFunctionalProperty .
 # 
 # http://modelmeth.nist.gov/modeling#isDirectlyProportionalTo
 
@@ -198,6 +167,7 @@ _:genid11 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#Abstract
 
 :Abstract a owl:Class ;
+	owl:disjointWith :Physical ;
 	rdfs:comment "Aspect with neither a spatial nor a temporal location. \\cite{Pease2011}" .
 # 
 # http://modelmeth.nist.gov/modeling#AleatoryUncertainty
@@ -260,18 +230,6 @@ _:genid11 a owl:Restriction ;
 	rdfs:subClassOf :Abstract ;
 	rdfs:comment "an expression of confidence in a belief" .
 # 
-# http://modelmeth.nist.gov/modeling#CuttingInsert
-
-:CuttingInsert a owl:Class ;
-	rdfs:subClassOf :CuttingTool ;
-	rdfs:comment "Removable, replaceable equipment piece that performs cutting operation" .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingTool
-
-:CuttingTool a owl:Class ;
-	rdfs:subClassOf :Tool ;
-	rdfs:comment "a Tool used to remove material from the Part" .
-# 
 # http://modelmeth.nist.gov/modeling#DerivedVariable
 
 :DerivedVariable a owl:Class ;
@@ -306,12 +264,6 @@ _:genid11 a owl:Restriction ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "Function describing the relation between ModelProperties" .
 # 
-# http://modelmeth.nist.gov/modeling#Equipment
-
-:Equipment a owl:Class ;
-	rdfs:subClassOf :Resource ;
-	rdfs:comment "Machine(s) used to turn workpiece into finished part" .
-# 
 # http://modelmeth.nist.gov/modeling#FEAModel
 
 :FEAModel a owl:Class ;
@@ -338,7 +290,7 @@ _:genid11 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#Labor
 
 :Labor a owl:Class ;
-	rdfs:subClassOf :Resource ;
+	rdfs:subClassOf :Process ;
 	owl:backwardCompatibleWith "the activities of people engaged in manufacturing." .
 # 
 # http://modelmeth.nist.gov/modeling#MeasurementError
@@ -407,6 +359,19 @@ _:genid11 a owl:Restriction ;
 	rdfs:subClassOf :PredictiveModel ;
 	rdfs:comment "a Model that encodes an AnalyticalModel or ProbabilisticModel for the purpose of simulation or computation of DerivedVariables." .
 # 
+# http://modelmeth.nist.gov/modeling#Object
+
+:Object a owl:Class ;
+	rdfs:subClassOf :Physical ;
+	owl:disjointWith :Process ;
+	rdfs:comment "\"Corresponds roughly to the class of ordinary objects.  Examples include normal physical objects, geographical regions, and locations of Processes, the complement of Objects in the Physical class.  In a 4D ontology, an Object is something whose spatiotemporal extent is thought of as dividing into spatial parts roughly parallel to the time-axis.\\cite{Pease2011}" .
+# 
+# http://modelmeth.nist.gov/modeling#Objective
+
+:Objective a owl:Class ;
+	rdfs:subClassOf :Proposition ;
+	rdfs:comment "a Proposition expressing an optative propositional attitude." .
+# 
 # http://modelmeth.nist.gov/modeling#ObjectiveFunction
 
 :ObjectiveFunction a owl:Class ;
@@ -437,9 +402,9 @@ _:genid11 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#PhysicalEquation
 
 :PhysicalEquation a owl:Class ;
-	rdfs:subClassOf :Equation , _:genid12 .
+	rdfs:subClassOf :Equation , _:genid11 .
 
-_:genid12 a owl:Restriction ;
+_:genid11 a owl:Restriction ;
 	owl:onProperty :hasDimensionalConsistency ;
 	owl:hasValue "true"^^xsd:boolean .
 
@@ -464,6 +429,12 @@ _:genid12 a owl:Restriction ;
 	rdfs:subClassOf :UncertaintySource ;
 	rdfs:comment "Uncertain model error resulting from selection of the form of the probabilistic sub-model used to describe the distribution of basic variables. \\cite{Kiureghian2008}" .
 # 
+# http://modelmeth.nist.gov/modeling#Process
+
+:Process a owl:Class ;
+	rdfs:subClassOf :Physical ;
+	rdfs:comment "\"The class of things that happen and have temporal parts or stages.  Examples include extended events like a football match or a race, actions like Pursuing and Reading, and biological processes. The formal definition is: anything that occurs in time but is not an Object.  Note that a Process may have participants 'inside' it which are Objects, such as the players in a football match.  In a 4D ontology, a Process is something whose spatiotemporal extent is thought of as dividing into temporal stages roughly perpendicular to the time-axis.\" \\cite{Pease2011}" .
+# 
 # http://modelmeth.nist.gov/modeling#ProcessPlan
 
 :ProcessPlan a owl:Class ;
@@ -481,6 +452,12 @@ _:genid12 a owl:Restriction ;
 	rdfs:subClassOf :Uncertainty ;
 	rdfs:comment "Uncertainty inherent in the basic random variables, such as the uncertainty inherent in material property constants and load values, which can be directly measured. \\cite{Kiureghian2008}" .
 # 
+# http://modelmeth.nist.gov/modeling#Proposition
+
+:Proposition a owl:Class ;
+	rdfs:subClassOf :ModelingConcept ;
+	rdfs:comment "Abstract entities that express a complete thought or a set of such thoughts.  As an example, the formula '(instance Yojo Cat)' expresses the Proposition that the entity named Yojo is an element of the Class of Cats.  Note that propositions are not restricted to the content expressed by individual sentences of a Language.  They may encompass the content expressed by theories, books, and even whole libraries.  It is important to distinguish Propositions from the ContentBearingObjects that express them.  A Proposition is a piece of information, e.g. that the cat is on the mat, but a ContentBearingObject is an Object that represents this information. A Proposition is an abstraction that may have multiple representations: strings, sounds, icons, etc.  For example, the Proposition that the cat is on the mat is represented here as a string of graphical characters displayed on a monitor and/or printed on paper, but it can be represented by a sequence of sounds or by some non-latin alphabet or by some cryptographic form\" \\cite{Pease2011}" .
+# 
 # http://modelmeth.nist.gov/modeling#RandomVariable
 
 :RandomVariable a owl:Class ;
@@ -495,9 +472,9 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#RegressionEquation
 
 :RegressionEquation a owl:Class ;
-	rdfs:subClassOf :Equation , _:genid13 .
+	rdfs:subClassOf :Equation , _:genid12 .
 
-_:genid13 a owl:Restriction ;
+_:genid12 a owl:Restriction ;
 	owl:onProperty :hasDimensionalConsistency ;
 	owl:hasValue "false"^^xsd:boolean .
 
@@ -506,7 +483,7 @@ _:genid13 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#Resource
 
 :Resource a owl:Class ;
-	rdfs:subClassOf :Physical ;
+	rdfs:subClassOf :Object ;
 	rdfs:comment "Physical things necessary for the production of a Part" .
 # 
 # http://modelmeth.nist.gov/modeling#StatisticalUncertaintyOfModelParameters
@@ -532,12 +509,6 @@ _:genid13 a owl:Restriction ;
 :Symbol a owl:Class ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "A representation of a ModelProperty" .
-# 
-# http://modelmeth.nist.gov/modeling#Tool
-
-:Tool a owl:Class ;
-	rdfs:subClassOf :Equipment ;
-	rdfs:comment "Equipment ancillary to performing a process" .
 # 
 # http://modelmeth.nist.gov/modeling#TypeDeclaration
 
@@ -599,6 +570,7 @@ _:genid13 a owl:Restriction ;
 # http://modelmeth.nist.gov/operations#ProcessOccurrence
 
 <http://modelmeth.nist.gov/operations#ProcessOccurrence> a owl:Class ;
+	rdfs:subClassOf :Process ;
 	rdfs:comment "Description of the manufacturing taking place to produce the finished part" .
 # 
 # http://org.semanticweb.owlapi/error#Error9
@@ -614,179 +586,6 @@ _:genid13 a owl:Restriction ;
 # #
 # #################################################################
 # 
-# 
-# http://modelmeth.nist.gov/modeling#Aluminum
-
-:Aluminum a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Boring
-
-:Boring a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CalculatedValue
-
-:CalculatedValue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CarbonToolSteel
-
-:CarbonToolSteel a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CastCobaltAlloy
-
-:CastCobaltAlloy a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CastIron
-
-:CastIron a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_1
-
-:Characteristic_Description_1 a owl:NamedIndividual ;
-	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
-	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_2
-
-:Characteristic_Description_2 a owl:NamedIndividual ;
-	:isDirectlyProportionalTo :CumulativeUse ;
-	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_3
-
-:Characteristic_Description_3 a owl:NamedIndividual ;
-	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_4
-
-:Characteristic_Description_4 a owl:NamedIndividual ;
-	:isDirectlyProportionalTo :CumulativeUse , :CuttingFeedRate , :CuttingSpeed ;
-	:hasObjectiveType "avoided_processCharacteristic"^^xsd:NMTOKEN .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_5
-
-:Characteristic_Description_5 a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_6
-
-:Characteristic_Description_6 a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_7
-
-:Characteristic_Description_7 a owl:NamedIndividual ;
-	:isDirectlyProportionalTo :CuttingSpeed .
-# 
-# http://modelmeth.nist.gov/modeling#Characteristic_Description_8
-
-:Characteristic_Description_8 a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Cost
-
-:Cost a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CumulativeUse
-
-:CumulativeUse a owl:NamedIndividual ;
-	:hasDescription :Characteristic_Description_6 ;
-	:hasQuantityKind qudt:Time .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingFeedRate
-
-:CuttingFeedRate a owl:NamedIndividual , :ModelParameter ;
-	:hasQuantityKind :LinearVelocity .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingFluidType
-
-:CuttingFluidType a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingForce
-
-:CuttingForce a owl:NamedIndividual , :ModelProperty ;
-	:hasDescription :Characteristic_Description_3 ;
-	:hasQuantityKind qudt:Force .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingForceEquation
-
-:CuttingForceEquation a owl:NamedIndividual , :RegressionEquation ;
-	rdfs:comment "F_i=k_c*V^(α_c)*f^(β_c)*d_i^(γ_c)*(tw,i+t)^σ_c" .
-# 
-# http://modelmeth.nist.gov/modeling#CuttingSpeed
-
-:CuttingSpeed a owl:NamedIndividual , :ModelParameter ;
-	:hasQuantityKind :LinearVelocity .
-# 
-# http://modelmeth.nist.gov/modeling#DepthOfCut
-
-:DepthOfCut a owl:NamedIndividual , :ModelProperty ;
-	:hasDescription :Characteristic_Description_5 ;
-	:hasQuantityKind qudt:Length .
-# 
-# http://modelmeth.nist.gov/modeling#Diameter
-
-:Diameter a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Diamond
-
-:Diamond a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Drift
-
-:Drift a owl:NamedIndividual ;
-	:hasDescription :Characteristic_Description_2 ;
-	:hasQuantityKind qudt:Length .
-# 
-# http://modelmeth.nist.gov/modeling#FinalDimension
-
-:FinalDimension a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Height
-
-:Height a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Horsepower
-
-:Horsepower a owl:NamedIndividual ;
-	:hasQuantityKind qudt:Power .
-# 
-# http://modelmeth.nist.gov/modeling#IndividualPartValue
-
-:IndividualPartValue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#InitialDimension
-
-:InitialDimension a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#InitialRadius
-
-:InitialRadius a owl:NamedIndividual , :ModelProperty .
-# 
-# http://modelmeth.nist.gov/modeling#KE
-
-:KE a owl:NamedIndividual ;
-	:hasUnits :EnergyAndWork .
-# 
-# http://modelmeth.nist.gov/modeling#Length
-
-:Length a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#LinearVelocity
-
-:LinearVelocity a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Mass
-
-:Mass a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MaximumAcceptableValue
-
-:MaximumAcceptableValue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MildSteel
-
-:MildSteel a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#MinimumAcceptableValue
-
-:MinimumAcceptableValue a owl:NamedIndividual .
 # 
 # http://modelmeth.nist.gov/modeling#OWLNamedIndividualfoo_0047
 
@@ -818,251 +617,15 @@ Open Issues:
 # http://modelmeth.nist.gov/modeling#POD-edits-2017-07-18
 
 :POD-edits-2017-07-18 a owl:NamedIndividual , :EditingNotes ;
-	rdfs:comment """* ObjectiveFunction definition needs work.
+	rdfs:comment """* ObjectiveFunction definition needs work. For example, what is the domain and codomain? (ordering? metric space?)
 * ModelingConcept. It is a meta concept, but I'm not sure where to go with it. Needs lots of work, many more subtypes. Look at SUMO (Representation?) for some ideas.
 * CAREFUL! : Updating multiple ontologies concurrently you may run into a \"do you want to reload\" message! DON'T RELOAD!
 * DL Limitation: I would really like my Operations concept to be an INSTANCE of a vaem domain. Can't do that!
 * I'm on the fence about all the xCharacteristic classes. One the one hand, they are a nice organizing principle for things that need more work inside QUDT, on the other hand, the domain of relations provides the same knowledge. Maybe I get rid of these once I have all the classes defined and organized.
-* Sequencing problems: should this be restricted to line sequencing, or is the fact that the facility is/is not a line rather inconsequential? The problem is primarily focused on BNs.""" .
-# 
-# http://modelmeth.nist.gov/modeling#Planing
-
-:Planing a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#ProcessTime
-
-:ProcessTime a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#ProcessingTimeEquation
-
-:ProcessingTimeEquation a owl:NamedIndividual , :PhysicalEquation ;
-	rdfs:comment """T_N=∑ t_c,i 
-
-∑ from i=1 to i=n
-
-t_c,i=(πD_i¯L)/(1000Vf)""" .
-# 
-# http://modelmeth.nist.gov/modeling#Radius
-
-:Radius a owl:NamedIndividual , :ModelProperty .
-# 
-# http://modelmeth.nist.gov/modeling#Revenue
-
-:Revenue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Shaping
-
-:Shaping a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#StainlessSteel
-
-:StainlessSteel a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#SurfaceRoughness
-
-:SurfaceRoughness a owl:NamedIndividual , :ModelProperty ;
-	:hasDescription :Characteristic_Description_1 ;
-	:hasQuantityKind qudt:Length .
-# 
-# http://modelmeth.nist.gov/modeling#SurfaceRoughnessEquation
-
-:SurfaceRoughnessEquation a owl:NamedIndividual , :RegressionEquation ;
-	rdfs:comment "Φ_i=k_r*V^(α_r)*f^(β_r)*d_i^(γ_r)*(tw,i+t)^σ_r" .
-# 
-# http://modelmeth.nist.gov/modeling#TargetValue
-
-:TargetValue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#Temperature
-
-:Temperature a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#ToolAngle
-
-:ToolAngle a owl:NamedIndividual ;
-	:hasDescription :Characteristic_Description_8 .
-# 
-# http://modelmeth.nist.gov/modeling#ToolWear
-
-:ToolWear a owl:NamedIndividual , :ModelProperty ;
-	:hasDescription :Characteristic_Description_4 ;
-	:hasQuantityKind qudt:Length .
-# 
-# http://modelmeth.nist.gov/modeling#ToolWearEquation
-
-:ToolWearEquation a owl:NamedIndividual , :RegressionEquation ;
-	rdfs:isDefinedBy "w_i=k_w*V^(α_w)*f^(β_w)*d_i^(γ_w)*(tw,i+t)^(σ_w)" .
-# 
-# http://modelmeth.nist.gov/modeling#TotalProcessValue
-
-:TotalProcessValue a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#TurningOptimization
-
-:TurningOptimization a owl:NamedIndividual , :Model ;
-	:referencesEquation :CuttingForceEquation , :ProcessingTimeEquation , :SurfaceRoughnessEquation , :ToolWearEquation .
-# 
-# http://modelmeth.nist.gov/modeling#WorkpieceDimension
-
-:WorkpieceDimension a owl:NamedIndividual .
-# 
-# http://modelmeth.nist.gov/modeling#X_1
-
-:X_1 a owl:NamedIndividual ;
-	:hasUnits :Kilogram .
-# 
-# http://modelmeth.nist.gov/modeling#Y
-
-:Y a owl:NamedIndividual ;
-	:hasUnits :Newton .
-# 
-# http://modelmeth.nist.gov/modeling#Z
-
-:Z a owl:NamedIndividual , :ObjectiveFunction ;
-	:hasObjectiveType "sought_characteristic" ;
-	rdfs:comment "Z=P/(N*t_h+T_N)" .
-# 
-# http://modelmeth.nist.gov/modeling#beta_1
-
-:beta_1 a owl:NamedIndividual ;
-	:hasUnits :MeterPerSecondSquared .
-# 
-# http://modelmeth.nist.gov/modeling#cuttingInsert
-
-:cuttingInsert a owl:NamedIndividual , :CuttingInsert .
-# 
-# http://modelmeth.nist.gov/modeling#m_1
-
-:m_1 a owl:NamedIndividual ;
-	:hasUnits :Mass .
-# 
-# http://qudt.org/1.1/schema/qudt#Dimensionless
-
-qudt:Dimensionless a owl:NamedIndividual .
-# 
-# http://qudt.org/1.1/schema/qudt#Force
-
-qudt:Force a owl:NamedIndividual .
-# 
-# http://qudt.org/1.1/schema/qudt#Length
-
-qudt:Length a owl:NamedIndividual .
-# 
-# http://qudt.org/1.1/schema/qudt#Power
-
-qudt:Power a owl:NamedIndividual .
-# 
-# http://qudt.org/1.1/schema/qudt#Time
-
-qudt:Time a owl:NamedIndividual .
-# 
-# http://qudt.org/vocab/unit#Micrometer
-
-unit:Micrometer a owl:NamedIndividual .
-# 
-# http://qudt.org/vocab/unit#Millimeter
-
-unit:Millimeter a owl:NamedIndividual .
-# 
-# http://qudt.org/vocab/unit#Minute
-
-unit:Minute a owl:NamedIndividual .
-# 
-# http://qudt.org/vocab/unit#USDollar
-
-unit:USDollar a owl:NamedIndividual .
-# 
-# 
-# 
-# #################################################################
-# #
-# #    Annotations
-# #
-# #################################################################
-# 
-# 
-
-:Cost rdfs:comment "a disadvantage incurred" .
-# 
-# 
-# 
-# #################################################################
-# #
-# #    General axioms
-# #
-# #################################################################
-# 
-# 
-
-_:genid14 a owl:AllDifferent ;
-	owl:distinctMembers _:genid16 .
-
-_:genid16 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid15 .
-
-_:genid15 a rdf:List ;
-	rdf:first :CastIron ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid17 a owl:AllDifferent ;
-	owl:distinctMembers _:genid19 .
-
-_:genid19 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid18 .
-
-_:genid18 a rdf:List ;
-	rdf:first :MildSteel ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid20 a owl:AllDifferent ;
-	owl:distinctMembers _:genid22 .
-
-_:genid22 a rdf:List ;
-	rdf:first :Aluminum ;
-	rdf:rest _:genid21 .
-
-_:genid21 a rdf:List ;
-	rdf:first :StainlessSteel ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid23 a owl:AllDifferent ;
-	owl:distinctMembers _:genid25 .
-
-_:genid25 a rdf:List ;
-	rdf:first :CastIron ;
-	rdf:rest _:genid24 .
-
-_:genid24 a rdf:List ;
-	rdf:first :MildSteel ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid26 a owl:AllDifferent ;
-	owl:distinctMembers _:genid28 .
-
-_:genid28 a rdf:List ;
-	rdf:first :CastIron ;
-	rdf:rest _:genid27 .
-
-_:genid27 a rdf:List ;
-	rdf:first :StainlessSteel ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid29 a owl:AllDifferent ;
-	owl:distinctMembers _:genid31 .
-
-_:genid31 a rdf:List ;
-	rdf:first :MildSteel ;
-	rdf:rest _:genid30 .
-
-_:genid30 a rdf:List ;
-	rdf:first :StainlessSteel ;
-	rdf:rest rdf:nil .
+* Sequencing problems: should this be restricted to line sequencing, or is the fact that the facility is/is not a line rather inconsequential? The problem is primarily focused on BNs.
+* LevelScheduling is in the wrong place; as described in its comment, it is an objective. In fact, I'm wondering whether some refactoring is in order: The SequencingProblem types need to be associated with objectives!
+* Need an upper ontology notion of \"condition\" for e.g. EquipmentCondition -- a state (ephemeral) rather than an enduring characteristic of the thing. sumo:StateChange ?
+* The things under ResourceState aren't states of resources,
+* Need to do something about class \"Machine\" -- it means \"WorkCenter\" ?""" .
 # 
 # Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi
