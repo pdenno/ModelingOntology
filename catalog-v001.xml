@@ -8,7 +8,7 @@
     <uri id="User Entered Import Resolution" name="http://model-meth.nist.gov/1.2/schema/vaem" uri="NIST-model-meth-OSG_vaem-(v1.2).ttl"/>
     <uri id="User Entered Import Resolution" name="http://model-meth.nist.gov/1.1/schema/qudt" uri="OVG_dimensions-qudt-(v1.1).ttl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1479672822912" name="http://www.linkedmodel.org/schema/dtype" uri="dtype.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1479672822912" name="http://www.linkedmodel.org/schema/vaem" uri="vaem.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1517412020198" name="http://www.linkedmodel.org/schema/dtype" uri="dtype.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1517412020198" name="http://www.linkedmodel.org/schema/vaem" uri="vaem.owl"/>
     </group>
 </catalog>
