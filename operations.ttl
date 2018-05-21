@@ -191,7 +191,7 @@ certain option $H_o$ that are to be allowed within $N_o$ sequence positions. \\c
 
 :FlowShopScheduling a owl:Class ;
 	rdfs:subClassOf :ProductionSchedulingProblem ;
-	rdfs:comment "A ProductionSchedulingProblen in which \"there are a set of m machines (processors) and a set of n jobs. Each job comprises a set of m operations which must be done on different machines. All jobs have the same processing operation order when passing through the machines. There are no precedence constraints among operations of different jobs. Operations cannot be interrupted and each machine can process only one operation at a time. The problem is to find the job sequences on the machines which minimise the makespan, i.e. the maximum of the completion times of all operations.\" \\cite{Seda2007}" , "POD This needs work. It combines objective with constraints and LineProductionType" .
+	rdfs:comment "A ProductionSchedulingProblem in which \"there are a set of m machines (processors) and a set of n jobs. Each job comprises a set of m operations which must be done on different machines. All jobs have the same processing operation order when passing through the machines. There are no precedence constraints among operations of different jobs. Operations cannot be interrupted and each machine can process only one operation at a time. The problem is to find the job sequences on the machines which minimise the makespan, i.e. the maximum of the completion times of all operations.\" \\cite{Seda2007}" , "POD This needs work. It combines objective with constraints and LineProductionType" .
 # 
 # http://modelmeth.nist.gov/operations#InputLevelScheduling
 
