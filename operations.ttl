@@ -135,8 +135,7 @@
 
 :CarSequencing a owl:Class ;
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#Abstract> , :SequencingConstraint ;
-	rdfs:comment """a sequencing problem similar to mixed model sequencing but with only certain (less restrictive) constraints to be decided, specifically, the maximum number of jobs with a 
-certain option $H_o$ that are to be allowed within $N_o$ sequence positions. \\cite{Boysen2009}""" .
+	rdfs:comment "a sequencing problem similar to mixed model sequencing but with only certain (less restrictive) constraints to be decided, specifically, the maximum number of jobs with a certain option $H_o$ that are to be allowed within $N_o$ sequence positions. \\cite{Boysen2009}" .
 # 
 # http://modelmeth.nist.gov/operations#ContinuousProduction
 
