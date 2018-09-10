@@ -181,7 +181,7 @@ _:genid9 a rdf:List ;
 
 :AnalyticalModel a owl:Class ;
 	rdfs:subClassOf :PredictiveModel ;
-	rdfs:comment "a Model that relates BasicVariables to DerivedVariables." .
+	rdfs:comment "a model through which deductive inference provides insight about the subject by relating BasicVariables to DerivedVariables. N.B. Typically, it is belief in the validity of certain causal claims that justifies use of an analytical model." .
 # 
 # http://modelmeth.nist.gov/modeling#BasicVariable
 

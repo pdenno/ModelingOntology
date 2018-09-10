@@ -202,7 +202,7 @@
 
 :Job a owl:Class ;
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#Process> , :OperationsDomainConcept ;
-	rdfs:comment "work that is performed to produce a product" .
+	rdfs:comment "work (sequence of processes) that is performed to produce a product or batch of products" .
 # 
 # http://modelmeth.nist.gov/operations#JobCharacteristic
 
@@ -226,7 +226,7 @@
 
 :Jobtype a owl:Class ;
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#Abstract> , :OperationsDomainConcept ;
-	rdfs:comment "the production process associated with a class of products." .
+	rdfs:comment "the production process type associated with a class of products." .
 # 
 # http://modelmeth.nist.gov/operations#Line
 
@@ -357,7 +357,7 @@
 
 :ProductionSchedulingProblem a owl:Class ;
 	rdfs:subClassOf <http://modelmeth.nist.gov/modeling#Abstract> , :OperationsProblem ;
-	rdfs:comment "the problem of deciding what to produce when or in what sequence to produce product. N.B. \"what to produce when\" can be viewed as the problem of scheduling for inventory management, or scheduling against supply chain constraints -- these problems are typically associated with sales and operations planning (S&OP). In contrast \"sequencing\" is about efficient use of manufacturing resource. This, and not the S&OP notion of scheduling, is the primary focus of the ontology with respect to production scheduling." .
+	rdfs:comment "the problem of deciding what to produce when or in what sequence to produce product. Potentially there are, of course, many objectives in scheduling production. Two general and distinct objectives are (1) the sales and operations planning (S\\&OP) problem: scheduling against supply chain constraints (e.g. in consideration of demand and inventory management) and (2) scheduling for efficient use of manufacturing resources. This latter objective is the primary focus of the ontology." .
 # 
 # http://modelmeth.nist.gov/operations#ProductionSystem
 
