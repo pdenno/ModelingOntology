@@ -3,12 +3,9 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix qudt: <http://qudt.org/1.1/schema/qudt#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix unit: <http://qudt.org/vocab/unit#> .
 
-<http://modelmeth.nist.gov/modeling> a owl:Ontology ;
-	owl:imports <http://qudt.org/2.0/schema/qudt> .
+<http://modelmeth.nist.gov/modeling> a owl:Ontology .
 # 
 # 
 # #################################################################
@@ -26,11 +23,6 @@
 # http://modelmeth.nist.gov/modeling#hasUnits
 
 :hasUnits a owl:AnnotationProperty .
-# 
-# http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
-
-<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> a owl:AnnotationProperty .
-# 
 # 
 # 
 # #################################################################
