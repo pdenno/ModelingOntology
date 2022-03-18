@@ -5,7 +5,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<http://modelmeth.nist.gov/modeling> a owl:Ontology .
+<http://modelmeth.nist.gov/modeling> a owl:Ontology ;
+	owl:imports <http://www.ontologydesignpatterns.org/ont/dlp/DLP_397.owl> .
 # 
 # 
 # #################################################################
@@ -23,6 +24,7 @@
 # http://modelmeth.nist.gov/modeling#hasUnits
 
 :hasUnits a owl:AnnotationProperty .
+# 
 # 
 # 
 # #################################################################
@@ -47,10 +49,6 @@ _:genid5 a rdf:List ;
 _:genid4 a rdf:List ;
 	rdf:first "sought_characteristic"^^xsd:NMTOKEN ;
 	rdf:rest rdf:nil .
-# 
-# http://modelmeth.nist.gov/modeling#clojureCode
-
-:clojureCode a rdfs:Datatype .
 # 
 # http://modelmeth.nist.gov/modeling#processCharacteristicObjectiveType
 
@@ -128,6 +126,10 @@ _:genid9 a rdf:List ;
 	a owl:AsymmetricProperty , owl:IrreflexiveProperty ;
 	rdfs:domain :Symbol ;
 	rdfs:range :ModelProperty .
+# 
+# http://modelmeth.nist.gov/modeling#valued-by
+
+:valued-by a owl:ObjectProperty .
 # 
 # 
 # 
@@ -214,12 +216,12 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#Cost
 
 :Cost a owl:Class ;
-	rdfs:subClassOf :Physical .
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#spatio-temporal-region> .
 # 
 # http://modelmeth.nist.gov/modeling#Credibility
 
 :Credibility a owl:Class ;
-	rdfs:subClassOf :Abstract ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "an expression of confidence in a belief" .
 # 
 # http://modelmeth.nist.gov/modeling#DerivedVariable
@@ -242,7 +244,7 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#EditingNotes
 
 :EditingNotes a owl:Class ;
-	rdfs:subClassOf :Physical .
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/InformationObjects.owl#information-realization> .
 # 
 # http://modelmeth.nist.gov/modeling#EpistemicUncertainty
 
@@ -265,7 +267,7 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#Fidelity
 
 :Fidelity a owl:Class ;
-	rdfs:subClassOf :Abstract ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "the degree to which a Model agrees with reality" .
 # 
 # http://modelmeth.nist.gov/modeling#Function
@@ -282,26 +284,25 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#Labor
 
 :Labor a owl:Class ;
-	rdfs:subClassOf :Process ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#process> , <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#temporal-region> ;
 	owl:backwardCompatibleWith "the activities of people engaged in manufacturing." .
 # 
 # http://modelmeth.nist.gov/modeling#MeasurementError
 
 :MeasurementError a owl:Class ;
-	rdfs:subClassOf :Abstract ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "the difference between a measured value and the 'true value' of the thing being measured [S. Bell]" .
 # 
 # http://modelmeth.nist.gov/modeling#Model
 
 :Model a owl:Class ;
-	rdfs:subClassOf :ModelAbstraction ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "an abstraction expressed formally to aid in planning or investigating" .
 # 
 # http://modelmeth.nist.gov/modeling#ModelAbstraction
 
 :ModelAbstraction a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	:clojureCodeNote "{:priority 0}"^^:clojureCode ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "A conceptualization of a manufacturing process" .
 # 
 # http://modelmeth.nist.gov/modeling#ModelFormUncertainty
@@ -318,7 +319,7 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#ModelProperty
 
 :ModelProperty a owl:Class ;
-	rdfs:subClassOf :ModelAbstraction ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	owl:disjointWith :Symbol ;
 	rdfs:comment "A property describing some aspect of a model. NOTE: It may be denoted in a mathematical relation by a Symbol." .
 # 
@@ -336,8 +337,7 @@ _:genid9 a rdf:List ;
 # http://modelmeth.nist.gov/modeling#ModelingConcept
 
 :ModelingConcept a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	:clojureCodeNote "A method of representation asserted by a modeling language. This class is \"meta\" to the other OWL classes and properties in this ontology. That is, whereas those other properties are used to model things directly, these are used to say what other modeling languages can express." , "{:priority 2}"^^:clojureCode .
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> .
 # 
 # http://modelmeth.nist.gov/modeling#NonControlledVariable
 
@@ -351,13 +351,6 @@ _:genid9 a rdf:List ;
 	rdfs:subClassOf :PredictiveModel ;
 	rdfs:comment "a Model that encodes an AnalyticalModel or ProbabilisticModel for the purpose of simulation or computation of DerivedVariables." .
 # 
-# http://modelmeth.nist.gov/modeling#Object
-
-:Object a owl:Class ;
-	rdfs:subClassOf :Physical ;
-	owl:disjointWith :Process ;
-	rdfs:comment "\"Corresponds roughly to the class of ordinary objects.  Examples include normal physical objects, geographical regions, and locations of Processes, the complement of Objects in the Physical class.  In a 4D ontology, an Object is something whose spatiotemporal extent is thought of as dividing into spatial parts roughly parallel to the time-axis.\\cite{Pease2011}" .
-# 
 # http://modelmeth.nist.gov/modeling#Objective
 
 :Objective a owl:Class ;
@@ -370,11 +363,6 @@ _:genid9 a rdf:List ;
 	rdfs:subClassOf :Equation ;
 	rdfs:comment "The function that describes the objective to be accomplished" .
 # 
-# http://modelmeth.nist.gov/modeling#Parameter
-
-:Parameter a owl:Class ;
-	rdfs:subClassOf :ModelingConcept .
-# 
 # http://modelmeth.nist.gov/modeling#ParameterMeasurementUncertainty
 
 :ParameterMeasurementUncertainty a owl:Class ;
@@ -385,11 +373,6 @@ _:genid9 a rdf:List ;
 
 :PerformanceVariable a owl:Class ;
 	rdfs:subClassOf :CausalViewpointVariable .
-# 
-# http://modelmeth.nist.gov/modeling#Physical
-
-:Physical a owl:Class ;
-	rdfs:comment "Aspect that has a spatial or temporal location \\cite{Pease2011}" .
 # 
 # http://modelmeth.nist.gov/modeling#PhysicalEquation
 
@@ -421,11 +404,20 @@ _:genid11 a owl:Restriction ;
 	rdfs:subClassOf :UncertaintySource ;
 	rdfs:comment "Uncertain model error resulting from selection of the form of the probabilistic sub-model used to describe the distribution of basic variables. \\cite{Kiureghian2008}" .
 # 
-# http://modelmeth.nist.gov/modeling#Process
+# http://modelmeth.nist.gov/modeling#ProbabilisticParameter
 
-:Process a owl:Class ;
-	rdfs:subClassOf :Physical ;
-	rdfs:comment "\"The class of things that happen and have temporal parts or stages.  Examples include extended events like a football match or a race, actions like Pursuing and Reading, and biological processes. The formal definition is: anything that occurs in time but is not an Object.  Note that a Process may have participants 'inside' it which are Objects, such as the players in a football match.  In a 4D ontology, a Process is something whose spatiotemporal extent is thought of as dividing into temporal stages roughly perpendicular to the time-axis.\" \\cite{Pease2011}" .
+:ProbabilisticParameter a owl:Class ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/ExtendedDnS.owl#parameter> , _:genid12 .
+
+_:genid12 a owl:Restriction ;
+	owl:onProperty :valued-by ;
+	owl:someValuesFrom :Probability .
+# 
+# http://modelmeth.nist.gov/modeling#Probability
+
+:Probability a owl:Class ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
+	rdfs:comment "a measure of the likelihood of an event described as a number in the range [0,1] where, roughly speaking 0 represents the impossibilty of the event and 1 represents its certainty." .
 # 
 # http://modelmeth.nist.gov/modeling#ProcessPlan
 
@@ -461,12 +453,27 @@ _:genid11 a owl:Restriction ;
 :RangeDeclaration a owl:Class ;
 	rdfs:subClassOf :ModelingConcept .
 # 
+# http://modelmeth.nist.gov/modeling#Rate
+
+:Rate a owl:Class ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
+	rdfs:comment "an abstract-region representing the number of occurrences of something per unit time." .
+# 
+# http://modelmeth.nist.gov/modeling#RateParameter
+
+:RateParameter a owl:Class ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/ExtendedDnS.owl#parameter> , _:genid13 .
+
+_:genid13 a owl:Restriction ;
+	owl:onProperty :valued-by ;
+	owl:someValuesFrom :Rate .
+# 
 # http://modelmeth.nist.gov/modeling#RegressionEquation
 
 :RegressionEquation a owl:Class ;
-	rdfs:subClassOf :Equation , _:genid12 .
+	rdfs:subClassOf :Equation , _:genid14 .
 
-_:genid12 a owl:Restriction ;
+_:genid14 a owl:Restriction ;
 	owl:onProperty :hasDimensionalConsistency ;
 	owl:hasValue "false"^^xsd:boolean .
 
@@ -475,7 +482,7 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#Resource
 
 :Resource a owl:Class ;
-	rdfs:subClassOf :Object ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#spatio-temporal-region> ;
 	rdfs:comment "Physical things necessary for the production of a Part" .
 # 
 # http://modelmeth.nist.gov/modeling#StatisticalUncertaintyOfModelParameters
@@ -510,15 +517,13 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/modeling#Uncertainty
 
 :Uncertainty a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	:clojureCodeNote "{:priority 1}"^^:clojureCode ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "the quantification of doubt about a measurement. \\cite{Bell2001}" .
 # 
 # http://modelmeth.nist.gov/modeling#UncertaintySource
 
 :UncertaintySource a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	:clojureCodeNote "{:priority 1}"^^:clojureCode .
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> .
 # 
 # http://modelmeth.nist.gov/operations#DefinedVariable
 
@@ -549,7 +554,7 @@ _:genid12 a owl:Restriction ;
 # http://modelmeth.nist.gov/operations#ModelTechnology
 
 <http://modelmeth.nist.gov/operations#ModelTechnology> a owl:Class ;
-	rdfs:subClassOf :ModelAbstraction ;
+	rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 	rdfs:comment "the technology used to represent the model and make inferences from it" .
 # 
 # http://modelmeth.nist.gov/operations#ModeledEntity
@@ -558,17 +563,6 @@ _:genid12 a owl:Restriction ;
 	rdfs:subClassOf :ModelAbstraction ;
 	rdfs:comment "an object modeled. Example: In a model of a production system, the machines and buffers may be Modeled Entities." ;
 	rdfs:label "Modeled Entity" .
-# 
-# http://modelmeth.nist.gov/operations#ProcessOccurrence
-
-<http://modelmeth.nist.gov/operations#ProcessOccurrence> a owl:Class ;
-	rdfs:subClassOf :Process ;
-	rdfs:comment "Description of the manufacturing taking place to produce the finished part" .
-# 
-# http://org.semanticweb.owlapi/error#Error9
-
-<http://org.semanticweb.owlapi/error#Error9> a owl:Class ;
-	rdfs:subClassOf :Physical .
 # 
 # 
 # 
@@ -612,7 +606,6 @@ Open Issues:
 	rdfs:comment """* ObjectiveFunction definition needs work. For example, what is the domain and codomain? (ordering? metric space?)
 * ModelingConcept. It is a meta concept, but I'm not sure where to go with it. Needs lots of work, many more subtypes. Look at SUMO (Representation?) for some ideas.
 * CAREFUL! : Updating multiple ontologies concurrently you may run into a \"do you want to reload\" message! DON'T RELOAD!
-* DL Limitation: I would really like my Operations concept to be an INSTANCE of a vaem domain. Can't do that!
 * I'm on the fence about all the xCharacteristic classes. One the one hand, they are a nice organizing principle for things that need more work inside QUDT, on the other hand, the domain of relations provides the same knowledge. Maybe I get rid of these once I have all the classes defined and organized.
 * Sequencing problems: should this be restricted to line sequencing, or is the fact that the facility is/is not a line rather inconsequential? The problem is primarily focused on BNs.
 * LevelScheduling is in the wrong place; as described in its comment, it is an objective. In fact, I'm wondering whether some refactoring is in order: The SequencingProblem types need to be associated with objectives!
@@ -620,4 +613,4 @@ Open Issues:
 * The things under ResourceState aren't states of resources,
 * Need to do something about class \"Machine\" -- it means \"WorkCenter\" ?""" .
 # 
-# Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
