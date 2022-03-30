@@ -1,5 +1,7 @@
 # ModelingOntology
 
+Tools to explore an ontology of manufacturing operations and analytical modeling built on top of DOLCE and DOLCE Lite Plus (DLP).
+
 An OWL ontology to support analytical investigations of manufacturing processes. The ontology is composed of two files:
  * [modeling.ttl](https://github.com/usnistgov/ModelingOntology/blob/master/modeling.ttl) defines the upper-level ontology.
  
