@@ -1,6 +1,6 @@
 # ModelingOntology
 
-An ontology of manufacturing operations and tools to explore it.
+An ontology of manufacturing operations and tools to explore the ontology.
 
 The ontology is currenlty composed of two namespaces/files and is DOLCE-based (using DOLCE Lite Plus).
  * [modeling.ttl](https://github.com/usnistgov/ModelingOntology/blob/master/resources/ontology/modeling.ttl) defines concepts useful to mathematical modeling generally.
